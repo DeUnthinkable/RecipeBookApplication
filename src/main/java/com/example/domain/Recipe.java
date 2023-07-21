@@ -41,4 +41,27 @@ public class Recipe
     public int getIngredientAmount(String ingredient){
         return this.nameIngredientAmountMap.getOrDefault(ingredient, 0);
     }
+
+    public void setPrepTime(int prepTime)
+    {
+        this.prepTime = prepTime;
+    }
+
+    public void setDescription(String description)
+    {
+        this.description = description;
+    }
+
+    public void setRecipeSteps(List<String> recipeSteps)
+    {
+        this.recipeSteps = recipeSteps;
+    }
+
+
+
+
+
+
+
+
 }
