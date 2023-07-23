@@ -10,6 +10,9 @@ public class Ingredient
     private String baseQuantity;
     private Map<Macronutrient, Integer> macronutrientCountMap;
 
+    public Ingredient(String name){
+        this.name = name;
+    }
     public String getName()
     {
         return this.name;
