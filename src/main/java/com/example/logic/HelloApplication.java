@@ -9,6 +9,7 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.nio.file.Paths;
 import java.util.Scanner;
 
 public class HelloApplication extends Application
@@ -33,10 +34,13 @@ public class HelloApplication extends Application
         stage.setTitle("Hello!");
         stage.setScene(scene);
         stage.show();
+
+        readIngredientsFromFile();
+        System.out.println(ingredientList.getIngredient("food"));
     }
 
-    public void readIngredientsFromFile(){
-        Scanner scanner = new Scanner("Ingredients.csv");
+    public void readIngredientsFromFile() throws IOException {
+        Scanner scanner = new Scanner(Paths.get("Ingredients.csv"));
         while (scanner.hasNextLine()){
             this.ingredientList.add(new Ingredient(scanner.nextLine()));
         }
