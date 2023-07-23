@@ -4,7 +4,7 @@ import java.util.*;
 
 public class Recipe
 {
-
+    private String recipeName;
     private IngredientListWithAmounts ingredientList;
     private List<String> recipeSteps;
     private int prepTime;
@@ -15,6 +15,11 @@ public class Recipe
         this.recipeSteps = new ArrayList<>();
         this.prepTime = 0;
         this.description = "";
+    }
+
+    public String getRecipeName()
+    {
+        return recipeName;
     }
 
     public Set<String> getIngredients(){
@@ -35,6 +40,11 @@ public class Recipe
 
     public String getDescription() {
         return description;
+    }
+
+    public void setRecipeName(String recipeName)
+    {
+        this.recipeName = recipeName;
     }
 
     public void setIngredientList(IngredientListWithAmounts ingredientList){

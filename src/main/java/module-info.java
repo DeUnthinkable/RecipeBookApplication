@@ -4,8 +4,8 @@ module com.example.recipebookapplication {
 
     requires org.controlsfx.controls;
 
-    opens com.example.recipebookapplication to javafx.fxml;
-    exports com.example.recipebookapplication;
+    opens com.example.logic to javafx.fxml;
+    exports com.example.logic;
     exports com.example.domain;
     opens com.example.domain to javafx.fxml;
 }

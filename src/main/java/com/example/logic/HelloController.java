@@ -1,4 +1,4 @@
-package com.example.recipebookapplication;
+package com.example.logic;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;

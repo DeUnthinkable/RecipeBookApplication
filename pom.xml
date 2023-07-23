@@ -65,7 +65,7 @@
                         <id>default-cli</id>
                         <configuration>
                             <mainClass>
-                                com.example.recipebookapplication/com.example.recipebookapplication.HelloApplication
+                                com.example.recipebookapplication/com.example.logic.HelloApplication
                             </mainClass>
                             <launcher>app</launcher>
                             <jlinkZipName>app</jlinkZipName>
