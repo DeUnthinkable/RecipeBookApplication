@@ -8,36 +8,29 @@ public class Ingredient
 {
     private String name;
     private String baseQuantity;
-    private Map<Macronutrient, Integer> macronutrientCountMap;
+    private NutritionFacts nutritionFacts;
 
     public Ingredient(String name){
         this.name = name;
+        this.baseQuantity = "";
+        this.nutritionFacts = new NutritionFacts();
     }
-    public String getName()
-    {
+    public String getName() {
         return this.name;
     }
-
-    public String getBaseQuantity()
-    {
-        return this.baseQuantity;
-    }
-
-    public int getMacronutrientCount(Macronutrient macronutrient){
-        return this.macronutrientCountMap.getOrDefault(macronutrient, 0);
-    }
-
-    public void setName(String name)
-    {
+    public void setName(String name) {
         this.name = name;
     }
 
-    public void setBaseQuantity(String baseQuantity)
-    {
+    public String getBaseQuantity() {
+        return this.baseQuantity;
+    }
+
+    public void setBaseQuantity(String baseQuantity) {
         this.baseQuantity = baseQuantity;
     }
 
-    public void setMacronutrientCountMap(Macronutrient macronutrient, int count){
-        this.macronutrientCountMap.put(macronutrient, count);
+    public int getNutritionFacts(Macronutrient macronutrient){
+        return this.macronutrientCountMap.getOrDefault(macronutrient, 0);
     }
 }
