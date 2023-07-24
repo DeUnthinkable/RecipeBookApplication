@@ -5,50 +5,33 @@ import java.util.*;
 public class Recipe
 {
     private String recipeName;
-    private IngredientListWithAmounts ingredientList;
+    private IngredientListWithAmounts ingredientListWithAmounts;
     private List<String> recipeSteps;
     private int prepTime;
     private String description;
 
     public Recipe(){
-        this.ingredientList = new IngredientListWithAmounts();
+        this.recipeName = "";
+        this.ingredientListWithAmounts = new IngredientListWithAmounts();
         this.recipeSteps = new ArrayList<>();
         this.prepTime = 0;
         this.description = "";
     }
 
-    public String getRecipeName()
-    {
+    public String getRecipeName() {
         return recipeName;
     }
 
-    public Set<String> getIngredients(){
-        return this.ingredientList.getIngredients();
+    public void setRecipeName(String recipeName) {
+        this.recipeName = recipeName;
     }
 
-    public int getIngredientAmount(String ingredient){
-        return this.ingredientList.getIngredientAmount(ingredient);
+    public IngredientListWithAmounts getIngredientsList(){
+        return this.ingredientListWithAmounts;
     }
 
     public List<String> getRecipeSteps() {
         return recipeSteps;
-    }
-
-    public int getPrepTime() {
-        return prepTime;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setRecipeName(String recipeName)
-    {
-        this.recipeName = recipeName;
-    }
-
-    public void setIngredientList(IngredientListWithAmounts ingredientList){
-        this.ingredientList = ingredientList;
     }
 
     public void setRecipeSteps(List<String> recipeSteps)
@@ -56,9 +39,17 @@ public class Recipe
         this.recipeSteps = recipeSteps;
     }
 
+    public int getPrepTime() {
+        return prepTime;
+    }
+
     public void setPrepTime(int prepTime)
     {
         this.prepTime = prepTime;
+    }
+
+    public String getDescription() {
+        return description;
     }
 
     public void setDescription(String description)

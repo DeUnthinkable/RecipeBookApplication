@@ -10,7 +10,7 @@ public class IngredientList
         this.nameIngredientMap = new HashMap<>();
     }
 
-    public Set<String> getIngredients(){
+    public Set<String> getIngredientsNames(){
         return this.nameIngredientMap.keySet();
     }
     public void add(Ingredient ingredient){
