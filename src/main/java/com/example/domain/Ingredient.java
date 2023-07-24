@@ -30,7 +30,7 @@ public class Ingredient
         this.baseQuantity = baseQuantity;
     }
 
-    public int getNutritionFacts(Macronutrient macronutrient){
-        return this.macronutrientCountMap.getOrDefault(macronutrient, 0);
+    public NutritionFacts getNutritionFacts(Macronutrient macronutrient){
+        return this.nutritionFacts;
     }
 }
