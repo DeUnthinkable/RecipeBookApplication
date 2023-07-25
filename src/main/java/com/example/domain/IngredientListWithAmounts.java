@@ -22,9 +22,16 @@ public class IngredientListWithAmounts extends IngredientList
     }
     //fix issue with overriding
     public void add(Ingredient ingredient, int amount){
-        super.add(ingredient);
-        this.nameIngredientAmountMap.put(ingredient.getName(), amount);
+        if(!this.nameIngredientAmountMap.containsKey(ingredient.getName())) {
+            super.add(ingredient);
+            this.nameIngredientAmountMap.put(ingredient.getName(), amount);
+        }
     }
+
+    public void add(Ingredient ingredient){
+        this.add(ingredient, 0);
+    }
+
     @Override
     public void remove(String ingredient){
         super.remove(ingredient);

@@ -14,7 +14,9 @@ public class IngredientList
         return this.nameIngredientMap.keySet();
     }
     public void add(Ingredient ingredient){
-        this.nameIngredientMap.put(ingredient.getName(), ingredient);
+        if(!this.nameIngredientMap.containsKey(ingredient.getName())) {
+            this.nameIngredientMap.put(ingredient.getName(), ingredient);
+        }
     }
     public void remove(String ingredient){
         this.nameIngredientMap.remove(ingredient);
