@@ -38,4 +38,12 @@ public class IngredientListWithAmounts extends IngredientList
         super.remove(ingredient);
         this.nameIngredientAmountMap.remove(ingredient);
     }
+
+    public int getTotalMacronutrientValue(Macronutrient macronutrient){
+        return   nameIngredientAmountMap.keySet().stream()
+                .map(ingredientName -> getIngredient(ingredientName))
+                .map(ingredient -> ingredient.getNutritionFacts())
+                .map(nutritionFacts -> nutritionFacts.getMacronutrientValue(macronutrient))
+                .reduce(0, Integer::sum);
+    }
 }
