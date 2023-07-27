@@ -30,7 +30,7 @@ public class Ingredient implements HasCalories
         this.baseQuantity = baseQuantity;
     }
 
-    public NutritionFacts getNutritionFacts(Macronutrient macronutrient){
+    public NutritionFacts getNutritionFacts(){
         return this.nutritionFacts;
     }
 
