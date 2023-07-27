@@ -39,12 +39,20 @@ public class HelloApplication extends Application
         System.out.println(ingredientList.getIngredient("food"));
     }
 
-    public void readIngredientsFromFile() throws IOException {
-        Scanner scanner = new Scanner(Paths.get("Ingredients.csv"));
-        while (scanner.hasNextLine()){
-            this.ingredientList.add(new Ingredient(scanner.nextLine()));
+    public void readIngredientsFromFile() {
+        try(Scanner scanner = new Scanner(Paths.get("Ingredients.csv"));)
+        {
+            while (scanner.hasNextLine())
+            {
+                this.ingredientList.add(new Ingredient(scanner.nextLine()));
+            }
+        }
+        catch (Exception error){
+            System.out.println(error.getMessage());
+            System.out.println(error.getStackTrace());
         }
     }
+
 
 
 }
