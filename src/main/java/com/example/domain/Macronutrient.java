@@ -1,6 +1,6 @@
 package com.example.domain;
 
-public enum Macronutrient
+public enum Macronutrient implements HasCalories
 {
     PROTEIN(4),
     CARBOHYDRATE(4),

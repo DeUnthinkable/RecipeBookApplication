@@ -2,7 +2,7 @@ package com.example.domain;
 
 import java.util.*;
 
-public class IngredientList
+public class IngredientList implements HasCalories
 {
     private Map<String, Ingredient> nameIngredientMap;
 
@@ -24,4 +24,13 @@ public class IngredientList
     public Ingredient getIngredient(String ingredient){
         return this.nameIngredientMap.get(ingredient);
     }
+
+    @Override
+    public int getCalories()
+    {
+        return nameIngredientMap.values().stream()
+                .map(ingredient -> ingredient.getCalories())
+                .reduce(0, Integer::sum);
+    }
+
 }
