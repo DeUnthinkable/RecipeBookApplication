@@ -37,9 +37,9 @@ public class Ingredient implements HasCalories
     @Override
     public int getCalories()
     {
-        int carbCalories = this.nutritionFacts.getCarbValue() * Macronutrient.CARBOHYDRATE.getCalories();
-        int fatCalories = this.nutritionFacts.getFatValue() * Macronutrient.FAT.getCalories();
-        int proteinCalories = this.nutritionFacts.getProteinValue() * Macronutrient.PROTEIN.getCalories();
+        int carbCalories = this.nutritionFacts.getMacronutrientValue(Macronutrient.CARBOHYDRATE) * Macronutrient.CARBOHYDRATE.getCalories();
+        int fatCalories = this.nutritionFacts.getMacronutrientValue(Macronutrient.FAT) * Macronutrient.FAT.getCalories();
+        int proteinCalories = this.nutritionFacts.getMacronutrientValue(Macronutrient.PROTEIN) * Macronutrient.PROTEIN.getCalories();
         return carbCalories + fatCalories + proteinCalories;
     }
 }
