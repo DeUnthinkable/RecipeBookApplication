@@ -2,6 +2,7 @@ package com.example.logic;
 
 import com.example.domain.Ingredient;
 import com.example.domain.IngredientList;
+import com.example.domain.Recipe;
 import com.example.domain.RecipesList;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -19,7 +20,7 @@ import java.util.Scanner;
 public class HelloApplication extends Application
 {
     private RecipesList recipesList;
-    private IngredientList ingredientList;
+    private IngredientList allIngredientsList;
     public static void main(String[] args)
     {
         launch();
@@ -28,7 +29,7 @@ public class HelloApplication extends Application
     @Override
     public void init(){
         recipesList = new RecipesList();
-        ingredientList = new IngredientList();
+        allIngredientsList = new IngredientList();
     }
     @Override
     public void start(Stage stage) throws IOException
@@ -39,9 +40,13 @@ public class HelloApplication extends Application
         stage.setScene(scene);
         stage.show();
 
-        writeIngredientsToFile("Ingredients.csv");
+        //test code
+        recipesList.addRecipe(new Recipe("scrambled eggs"));
+        //allIngredientsList.add(new Ingredient("tomato"));
+        recipesList.getRecipe("scrambled eggs").getIngredientsList().add(allIngredientsList.getIngredient("tomato"));
+
         readIngredientsFromFile();
-        System.out.println(ingredientList.getIngredient("food"));
+        writeIngredientsToFile("Ingredients.csv");
     }
 
     public void readIngredientsFromFile() {
@@ -49,7 +54,7 @@ public class HelloApplication extends Application
         {
             while (scanner.hasNextLine())
             {
-                this.ingredientList.add(new Ingredient(scanner.nextLine()));
+                this.allIngredientsList.add(new Ingredient(scanner.nextLine()));
             }
         }
         catch (Exception error){
@@ -60,7 +65,7 @@ public class HelloApplication extends Application
     public void writeIngredientsToFile(String filename){
         try(PrintWriter writer = new PrintWriter(filename))
         {
-            List<String> ingredientsNames = new ArrayList<>();
+            List<String> ingredientsNames = allIngredientsList.getIngredientsNames().stream().toList();
             for(int i = 0; i < ingredientsNames.size(); i++){
                 writer.println(ingredientsNames.get(i));
             }
