@@ -1,10 +1,15 @@
 package com.example.domain;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
 public class RecipesList {
     private List<Recipe> recipes;
+
+    public RecipesList(){
+        this.recipes = new ArrayList<>();
+    }
 
     public List<String> getRecipesNames(){
         return this.recipes.stream()
