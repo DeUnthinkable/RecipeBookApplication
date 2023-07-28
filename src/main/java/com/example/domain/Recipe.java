@@ -10,8 +10,8 @@ public class Recipe
     private int prepTime;
     private String description;
 
-    public Recipe(){
-        this.recipeName = "";
+    public Recipe(String recipeName){
+        this.recipeName = recipeName;
         this.ingredientListWithAmounts = new IngredientListWithAmounts();
         this.recipeSteps = new ArrayList<>();
         this.prepTime = 0;
