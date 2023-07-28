@@ -8,8 +8,12 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
+import java.io.File;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.nio.file.Paths;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 public class HelloApplication extends Application
@@ -35,6 +39,7 @@ public class HelloApplication extends Application
         stage.setScene(scene);
         stage.show();
 
+        writeIngredientsToFile("Ingredients.csv");
         readIngredientsFromFile();
         System.out.println(ingredientList.getIngredient("food"));
     }
@@ -48,6 +53,19 @@ public class HelloApplication extends Application
             }
         }
         catch (Exception error){
+            System.out.println(error.getMessage());
+            System.out.println(error.getStackTrace());
+        }
+    }
+    public void writeIngredientsToFile(String filename){
+        try(PrintWriter writer = new PrintWriter(filename))
+        {
+            List<String> ingredientsNames = new ArrayList<>();
+            for(int i = 0; i < ingredientsNames.size(); i++){
+                writer.println(ingredientsNames.get(i));
+            }
+        }
+        catch(Exception error){
             System.out.println(error.getMessage());
             System.out.println(error.getStackTrace());
         }
