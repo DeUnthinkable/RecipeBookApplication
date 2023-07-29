@@ -83,6 +83,7 @@ public class HelloApplication extends Application
         {
             StringBuilder record = new StringBuilder();
             for(int i = 0; i < recipesList.getRecipesNames().size(); i++){
+                //Collecting information to add to record
                 Recipe recipe = recipesList.getRecipe(recipesList.getRecipesNames().get(i));
                 String recipeName = recipe.getRecipeName();
                 Iterator<String> ingredients = recipe.getIngredientsList().getIngredientsNames().stream().toList().iterator();
@@ -92,12 +93,19 @@ public class HelloApplication extends Application
 
                 record.append(recipeName).append(",");
 
+                //Add ingredient name and ingredient amount to record
                 for(int j = 0; j < 15; j++){
                     if(ingredients.hasNext()){
-                        record.append(ingredients.next());
+
+                        String ingredientName = ingredients.next();
+                        record.append(ingredientName);
+                        record.append(",");
+                        record.append(recipe.getIngredientsList().getIngredientAmount(ingredientName));
                     }
                     record.append(",");
                 }
+
+                //Add recipe steps to record
                 for(int j = 0; j < 15; j++){
                     if(steps.hasNext()){
                         record.append(steps.next());
@@ -105,6 +113,7 @@ public class HelloApplication extends Application
                     record.append(",");
                 }
 
+                //Add prep time and description to record
                 record.append(prepTime).append(",");
                 record.append(description);
 
