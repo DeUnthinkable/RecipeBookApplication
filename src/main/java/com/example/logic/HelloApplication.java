@@ -135,7 +135,7 @@ public class HelloApplication extends Application
     public void readRecipesFromFile(String filename){
         try(Scanner scanner = new Scanner(Paths.get(filename))){
             while(scanner.hasNextLine()){
-                String[] record = scanner.nextLine().split(",");
+                String[] record = scanner.nextLine().split(",",48);
                 System.out.println(record.length);
 
                 Recipe recipe = new Recipe(record[0]);
