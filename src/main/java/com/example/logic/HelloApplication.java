@@ -14,6 +14,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Scanner;
 
@@ -42,11 +43,13 @@ public class HelloApplication extends Application
 
         //test code
         recipesList.addRecipe(new Recipe("scrambled eggs"));
-        //allIngredientsList.add(new Ingredient("tomato"));
+        allIngredientsList.add(new Ingredient("tomato"));
+        readIngredientsFromFile();
         recipesList.getRecipe("scrambled eggs").getIngredientsList().add(allIngredientsList.getIngredient("tomato"));
 
-        readIngredientsFromFile();
+
         writeIngredientsToFile("Ingredients.csv");
+        writeRecipesToFile("Recipes.csv");
     }
 
     public void readIngredientsFromFile() {
@@ -75,7 +78,44 @@ public class HelloApplication extends Application
             System.out.println(error.getStackTrace());
         }
     }
+    public void writeRecipesToFile(String filename){
+        try(PrintWriter writer = new PrintWriter(filename))
+        {
+            StringBuilder record = new StringBuilder();
+            for(int i = 0; i < recipesList.getRecipesNames().size(); i++){
+                Recipe recipe = recipesList.getRecipe(recipesList.getRecipesNames().get(i));
+                String recipeName = recipe.getRecipeName();
+                Iterator<String> ingredients = recipe.getIngredientsList().getIngredientsNames().stream().toList().iterator();
+                Iterator<String> steps = recipe.getRecipeSteps().iterator();
+                int prepTime = recipe.getPrepTime();
+                String description = recipe.getDescription();
 
+                record.append(recipeName).append(",");
 
+                for(int j = 0; j < 15; j++){
+                    if(ingredients.hasNext()){
+                        record.append(ingredients.next());
+                    }
+                    record.append(",");
+                }
+                for(int j = 0; j < 15; j++){
+                    if(steps.hasNext()){
+                        record.append(steps.next());
+                    }
+                    record.append(",");
+                }
+
+                record.append(prepTime).append(",");
+                record.append(description);
+
+                writer.println(record);
+                writer.close();
+            }
+        }
+        catch(Exception error){
+            System.out.println(error.getMessage());
+            System.out.println(error.getStackTrace());
+        }
+    }
 
 }
