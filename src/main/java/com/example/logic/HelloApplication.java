@@ -95,11 +95,14 @@ public class HelloApplication extends Application
 
                 //Add ingredient name and ingredient amount to record
                 for(int j = 0; j < 15; j++){
-                    if(ingredients.hasNext()){
-
-                        String ingredientName = ingredients.next();
+                    boolean hasNextIngredient = ingredients.hasNext();
+                    String ingredientName = "";
+                    if(hasNextIngredient){
+                        ingredientName = ingredients.next();
                         record.append(ingredientName);
-                        record.append(",");
+                    }
+                    record.append(",");
+                    if(hasNextIngredient){
                         record.append(recipe.getIngredientsList().getIngredientAmount(ingredientName));
                     }
                     record.append(",");
@@ -123,7 +126,7 @@ public class HelloApplication extends Application
         }
         catch(Exception error){
             System.out.println(error.getMessage());
-            System.out.println(error.getStackTrace());
+            error.printStackTrace();
         }
     }
 
