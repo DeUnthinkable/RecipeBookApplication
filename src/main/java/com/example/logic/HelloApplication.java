@@ -42,9 +42,11 @@ public class HelloApplication extends Application
         stage.show();
 
         //test code
-        recipesList.addRecipe(new Recipe("scrambled eggs"));
-        allIngredientsList.add(new Ingredient("tomato"));
+        //recipesList.addRecipe(new Recipe("scrambled eggs"));
+
+        //allIngredientsList.add(new Ingredient("tomato"));
         readIngredientsFromFile();
+        readRecipesFromFile("Recipes.csv");
         recipesList.getRecipe("scrambled eggs").getIngredientsList().add(allIngredientsList.getIngredient("tomato"));
 
 
@@ -122,6 +124,34 @@ public class HelloApplication extends Application
 
                 writer.println(record);
                 writer.close();
+            }
+        }
+        catch(Exception error){
+            System.out.println(error.getMessage());
+            error.printStackTrace();
+        }
+    }
+
+    public void readRecipesFromFile(String filename){
+        try(Scanner scanner = new Scanner(Paths.get(filename))){
+            while(scanner.hasNextLine()){
+                String[] record = scanner.nextLine().split(",");
+                System.out.println(record.length);
+
+                Recipe recipe = new Recipe(record[0]);
+                recipesList.addRecipe(recipe);
+                for(int i = 1; i < 31 && !record[i].equals(""); i+=2) {
+                    recipe.getIngredientsList().add(new Ingredient(record[i]), Integer.parseInt(record[i+1]));
+                }
+
+                List<String> recipeSteps = new ArrayList<>();
+                for(int i = 31; i < 46 && record[i] != null; i++){
+                    recipeSteps.add(record[i]);
+                }
+                recipe.setRecipeSteps(recipeSteps);
+
+                recipe.setPrepTime(Integer.parseInt(record[46]));
+                recipe.setDescription(record[47]);
             }
         }
         catch(Exception error){
