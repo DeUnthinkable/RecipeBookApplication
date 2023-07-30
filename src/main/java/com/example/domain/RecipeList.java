@@ -4,10 +4,11 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class RecipesList {
+public class RecipeList
+{
     private List<Recipe> recipes;
 
-    public RecipesList(){
+    public RecipeList(){
         this.recipes = new ArrayList<>();
     }
 

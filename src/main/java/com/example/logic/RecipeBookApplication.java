@@ -3,13 +3,12 @@ package com.example.logic;
 import com.example.domain.Ingredient;
 import com.example.domain.IngredientList;
 import com.example.domain.Recipe;
-import com.example.domain.RecipesList;
+import com.example.domain.RecipeList;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
-import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.nio.file.Paths;
@@ -18,9 +17,9 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Scanner;
 
-public class HelloApplication extends Application
+public class RecipeBookApplication extends Application
 {
-    private RecipesList recipesList;
+    private RecipeList recipeList;
     private IngredientList allIngredientsList;
     public static void main(String[] args)
     {
@@ -29,13 +28,13 @@ public class HelloApplication extends Application
 
     @Override
     public void init(){
-        recipesList = new RecipesList();
+        recipeList = new RecipeList();
         allIngredientsList = new IngredientList();
     }
     @Override
     public void start(Stage stage) throws IOException
     {
-        FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("hello-view.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(RecipeBookApplication.class.getResource("start-view.fxml"));
         Scene scene = new Scene(fxmlLoader.load(), 320, 240);
         stage.setTitle("Hello!");
         stage.setScene(scene);
@@ -47,7 +46,7 @@ public class HelloApplication extends Application
         //allIngredientsList.add(new Ingredient("tomato"));
         readIngredientsFromFile();
         readRecipesFromFile("Recipes.csv");
-        recipesList.getRecipe("scrambled eggs").getIngredientsList().add(allIngredientsList.getIngredient("tomato"));
+        recipeList.getRecipe("scrambled eggs").getIngredientsList().add(allIngredientsList.getIngredient("tomato"));
 
 
         writeIngredientsToFile("Ingredients.csv");
@@ -84,9 +83,9 @@ public class HelloApplication extends Application
         try(PrintWriter writer = new PrintWriter(filename))
         {
             StringBuilder record = new StringBuilder();
-            for(int i = 0; i < recipesList.getRecipesNames().size(); i++){
+            for(int i = 0; i < recipeList.getRecipesNames().size(); i++){
                 //Collecting information to add to record
-                Recipe recipe = recipesList.getRecipe(recipesList.getRecipesNames().get(i));
+                Recipe recipe = recipeList.getRecipe(recipeList.getRecipesNames().get(i));
                 String recipeName = recipe.getRecipeName();
                 Iterator<String> ingredients = recipe.getIngredientsList().getIngredientsNames().stream().toList().iterator();
                 Iterator<String> steps = recipe.getRecipeSteps().iterator();
@@ -139,7 +138,7 @@ public class HelloApplication extends Application
                 System.out.println(record.length);
 
                 Recipe recipe = new Recipe(record[0]);
-                recipesList.addRecipe(recipe);
+                recipeList.addRecipe(recipe);
                 for(int i = 1; i < 31 && !record[i].equals(""); i+=2) {
                     recipe.getIngredientsList().add(new Ingredient(record[i]), Integer.parseInt(record[i+1]));
                 }
