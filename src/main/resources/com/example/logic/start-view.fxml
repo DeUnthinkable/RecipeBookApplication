@@ -1,51 +1,83 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.SplitPane?>
+<?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
-<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="480.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1">
-   <center>
-      <VBox prefHeight="200.0" prefWidth="100.0" spacing="5.0" BorderPane.alignment="CENTER">
-         <children>
-            <Button contentDisplay="CENTER" mnemonicParsing="false" text="Recipe1" textAlignment="CENTER">
-               <opaqueInsets>
-                  <Insets />
-               </opaqueInsets>
-            </Button>
-            <Button layoutX="10.0" layoutY="10.0" mnemonicParsing="false" text="Recipe2" />
-            <Button layoutX="10.0" layoutY="160.0" mnemonicParsing="false" text="Add Recipe +" />
-         </children>
-         <padding>
-            <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-         </padding>
-      </VBox>
-   </center>
-   <top>
-      <VBox alignment="TOP_CENTER" prefHeight="171.0" prefWidth="640.0" BorderPane.alignment="TOP_CENTER">
-         <children>
-            <Label alignment="CENTER_RIGHT" text="Recipe Book">
-               <font>
-                  <Font size="44.0" />
-               </font>
-            </Label>
-         </children>
-         <padding>
-            <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-         </padding>
-      </VBox>
-   </top>
-   <right>
-      <HBox alignment="TOP_RIGHT" prefHeight="100.0" prefWidth="200.0" spacing="10.0">
-         <children>
-            <Button mnemonicParsing="false" text="All Ingredients" />
-            <Button mnemonicParsing="false" text="Delete Mode" />
-         </children>
-      </HBox>
-   </right>
-</BorderPane>
+<SplitPane dividerPositions="0.5" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/20.0.1">
+   <items>
+      <BorderPane prefHeight="200.0" prefWidth="200.0">
+         <center>
+            <VBox prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER">
+               <children>
+                  <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="206.0" text="Button" />
+                  <Button layoutX="10.0" layoutY="85.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="206.0" text="Button" />
+                  <Button layoutX="10.0" layoutY="110.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="206.0" text="Button" />
+                  <Button layoutX="10.0" layoutY="135.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="206.0" text="Button" />
+               </children>
+            </VBox>
+         </center>
+         <top>
+            <AnchorPane prefHeight="88.0" prefWidth="296.0" BorderPane.alignment="CENTER">
+               <children>
+                  <Label text="Recipe" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="0.0">
+                     <font>
+                        <Font size="23.0" />
+                     </font>
+                  </Label>
+                  <MenuBar layoutX="-9.0" layoutY="14.0" prefHeight="25.0" prefWidth="99.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
+                    <menus>
+                      <Menu mnemonicParsing="false" text="Edit Mode...">
+                        <items>
+                          <MenuItem mnemonicParsing="false" text="Add Recipe" />
+                              <MenuItem mnemonicParsing="false" text="Delete Recipe" />
+                              <MenuItem mnemonicParsing="false" text="Edit Name" />
+                        </items>
+                      </Menu>
+                    </menus>
+                  </MenuBar>
+               </children>
+            </AnchorPane>
+         </top>
+      </BorderPane>
+      <BorderPane prefHeight="200.0" prefWidth="200.0">
+         <center>
+            <VBox prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER">
+               <children>
+                  <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="206.0" text="Button" />
+                  <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="206.0" text="Button" />
+                  <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="206.0" text="Button" />
+                  <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="206.0" text="Button" />
+               </children>
+            </VBox>
+         </center>
+         <top>
+            <AnchorPane prefHeight="88.0" prefWidth="296.0" BorderPane.alignment="CENTER">
+               <children>
+                  <Label text="Book" AnchorPane.leftAnchor="5.0" AnchorPane.topAnchor="0.0">
+                     <font>
+                        <Font size="23.0" />
+                     </font>
+                  </Label>
+                  <MenuBar layoutX="-9.0" layoutY="14.0" prefHeight="25.0" prefWidth="111.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                     <menus>
+                        <Menu mnemonicParsing="false" text="All Ingredients">
+                           <items>
+                              <MenuItem mnemonicParsing="false" text="Delete" />
+                           </items>
+                        </Menu>
+                     </menus>
+                  </MenuBar>
+               </children>
+            </AnchorPane>
+         </top>
+      </BorderPane>
+   </items>
+</SplitPane>
