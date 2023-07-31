@@ -19,8 +19,8 @@ import java.util.Scanner;
 
 public class RecipeBookApplication extends Application
 {
-    private RecipeList recipeList;
-    private IngredientList allIngredientsList;
+    private static RecipeList recipeList;
+    private static IngredientList allIngredientsList;
     public static void main(String[] args)
     {
         launch();
@@ -53,12 +53,12 @@ public class RecipeBookApplication extends Application
         writeRecipesToFile("Recipes.csv");
     }
 
-    public void readIngredientsFromFile() {
+    public static void readIngredientsFromFile() {
         try(Scanner scanner = new Scanner(Paths.get("Ingredients.csv"));)
         {
             while (scanner.hasNextLine())
             {
-                this.allIngredientsList.add(new Ingredient(scanner.nextLine()));
+                allIngredientsList.add(new Ingredient(scanner.nextLine()));
             }
         }
         catch (Exception error){
@@ -66,7 +66,7 @@ public class RecipeBookApplication extends Application
             System.out.println(error.getStackTrace());
         }
     }
-    public void writeIngredientsToFile(String filename){
+    public static void writeIngredientsToFile(String filename){
         try(PrintWriter writer = new PrintWriter(filename))
         {
             List<String> ingredientsNames = allIngredientsList.getIngredientsNames().stream().toList();
@@ -79,7 +79,7 @@ public class RecipeBookApplication extends Application
             System.out.println(error.getStackTrace());
         }
     }
-    public void writeRecipesToFile(String filename){
+    public static void writeRecipesToFile(String filename){
         try(PrintWriter writer = new PrintWriter(filename))
         {
             StringBuilder record = new StringBuilder();
@@ -131,7 +131,7 @@ public class RecipeBookApplication extends Application
         }
     }
 
-    public void readRecipesFromFile(String filename){
+    public static void readRecipesFromFile(String filename){
         try(Scanner scanner = new Scanner(Paths.get(filename))){
             while(scanner.hasNextLine()){
                 String[] record = scanner.nextLine().split(",",48);
