@@ -159,4 +159,13 @@ public class RecipeBookApplication extends Application
         }
     }
 
+    public static RecipeList getRecipeList()
+    {
+        return recipeList;
+    }
+
+    public static IngredientList getAllIngredientsList()
+    {
+        return allIngredientsList;
+    }
 }
