@@ -145,7 +145,6 @@ public class AppDataReadWriteStore
         try(Scanner scanner = new Scanner(Paths.get(recipeFilePath))){
             while(scanner.hasNextLine()){
                 String[] record = scanner.nextLine().split(",",48);
-                System.out.println(record.length);
 
                 Recipe recipe = new Recipe(record[0]);
                 recipeList.addRecipe(recipe);
