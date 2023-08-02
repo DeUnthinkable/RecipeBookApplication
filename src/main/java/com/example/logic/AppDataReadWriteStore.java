@@ -19,9 +19,12 @@ public class AppDataReadWriteStore
     private String ingredientsFilePath;
     private String recipeFilePath;
 
-    public AppDataReadWriteStore(){
+    public AppDataReadWriteStore(String ingredientsFilePath, String recipeFilePath){
         recipeList = new RecipeList();
         allIngredientsList = new IngredientList();
+
+        this.ingredientsFilePath = ingredientsFilePath;
+        this.recipeFilePath = recipeFilePath;
 
         //Preload past data entered by user
         readIngredientsFromFile();
