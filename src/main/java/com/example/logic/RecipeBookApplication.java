@@ -38,8 +38,8 @@ public class RecipeBookApplication extends Application
         stage.show();
 
         stage.setOnCloseRequest(windowEvent -> {
-            appDataReadWriteStore.writeIngredientsToFile("Ingredients.csv");
-            appDataReadWriteStore.writeRecipesToFile("Recipes.csv");
+            appDataReadWriteStore.writeIngredientsToFile();
+            appDataReadWriteStore.writeRecipesToFile();
         });
     }
 }

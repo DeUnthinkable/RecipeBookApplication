@@ -14,8 +14,10 @@ import java.util.Scanner;
 
 public class AppDataReadWriteStore
 {
-    private RecipeList recipeList;
-    private IngredientList allIngredientsList;
+    private final RecipeList recipeList;
+    private final IngredientList allIngredientsList;
+    private String ingredientsFilePath;
+    private String recipeFilePath;
 
     public AppDataReadWriteStore(){
         recipeList = new RecipeList();
@@ -23,10 +25,43 @@ public class AppDataReadWriteStore
 
         //Preload past data entered by user
         readIngredientsFromFile();
-        readRecipesFromFile("Recipes.csv");
+        readRecipesFromFile();
     }
+
+    public  RecipeList getRecipeList()
+    {
+        return recipeList;
+    }
+
+    public  IngredientList getAllIngredientsList()
+    {
+        return allIngredientsList;
+    }
+
+    public String getIngredientsFilePath()
+    {
+        return ingredientsFilePath;
+    }
+
+    public void setIngredientsFilePath(String ingredientsFilePath)
+    {
+        this.ingredientsFilePath = ingredientsFilePath;
+    }
+
+    public String getRecipeFilePath()
+    {
+        return recipeFilePath;
+    }
+
+    public void setRecipeFilePath(String recipeFilePath)
+    {
+        recipeFilePath = recipeFilePath;
+    }
+
+
+
     public void readIngredientsFromFile() {
-        try(Scanner scanner = new Scanner(Paths.get("Ingredients.csv"));)
+        try(Scanner scanner = new Scanner(Paths.get(ingredientsFilePath));)
         {
             while (scanner.hasNextLine())
             {
@@ -38,8 +73,8 @@ public class AppDataReadWriteStore
             System.out.println(error.getStackTrace());
         }
     }
-    public void writeIngredientsToFile(String filename){
-        try(PrintWriter writer = new PrintWriter(filename))
+    public void writeIngredientsToFile(){
+        try(PrintWriter writer = new PrintWriter(ingredientsFilePath))
         {
             List<String> ingredientsNames = allIngredientsList.getIngredientsNames().stream().toList();
             for(int i = 0; i < ingredientsNames.size(); i++){
@@ -51,8 +86,8 @@ public class AppDataReadWriteStore
             System.out.println(error.getStackTrace());
         }
     }
-    public void writeRecipesToFile(String filename){
-        try(PrintWriter writer = new PrintWriter(filename))
+    public void writeRecipesToFile(){
+        try(PrintWriter writer = new PrintWriter(recipeFilePath))
         {
             StringBuilder record = new StringBuilder();
             for(int i = 0; i < recipeList.getRecipesNames().size(); i++){
@@ -103,8 +138,8 @@ public class AppDataReadWriteStore
         }
     }
 
-    public void readRecipesFromFile(String filename){
-        try(Scanner scanner = new Scanner(Paths.get(filename))){
+    public void readRecipesFromFile(){
+        try(Scanner scanner = new Scanner(Paths.get(recipeFilePath))){
             while(scanner.hasNextLine()){
                 String[] record = scanner.nextLine().split(",",48);
                 System.out.println(record.length);
@@ -129,15 +164,5 @@ public class AppDataReadWriteStore
             System.out.println(error.getMessage());
             error.printStackTrace();
         }
-    }
-
-    public  RecipeList getRecipeList()
-    {
-        return recipeList;
-    }
-
-    public  IngredientList getAllIngredientsList()
-    {
-        return allIngredientsList;
     }
 }
