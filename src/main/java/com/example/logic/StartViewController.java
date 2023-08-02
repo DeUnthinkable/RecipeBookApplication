@@ -5,6 +5,12 @@ import javafx.scene.control.Label;
 
 public class StartViewController
 {
+    private  AppDataReadWriteStore appDataReadWriteStore;
+
+    public void initData(AppDataReadWriteStore appDataReadWriteStore){
+        this.appDataReadWriteStore = appDataReadWriteStore;
+    }
+
     @FXML
     private Label welcomeText;
 
