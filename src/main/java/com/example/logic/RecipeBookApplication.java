@@ -30,6 +30,10 @@ public class RecipeBookApplication extends Application
         FXMLLoader fxmlLoader = new FXMLLoader(RecipeBookApplication.class.getResource("start-view.fxml"));
         Scene scene = new Scene(fxmlLoader.load(), 640, 480);
 
+        AppDataReadWriteStore appDataReadWriteStore = new AppDataReadWriteStore();
+        StartViewController controller = fxmlLoader.getController();
+        controller.initData(appDataReadWriteStore);
+
         stage.setScene(scene);
         stage.show();
 
