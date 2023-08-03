@@ -7,6 +7,11 @@ import javafx.scene.layout.VBox;
 
 public class StartViewController
 {
+    @FXML
+    private VBox leftRecipesButtonsColumn;
+    @FXML
+    private VBox rightRecipesButtonsColumn;
+
     private  AppDataReadWriteStore appDataReadWriteStore;
 
     public void initData(AppDataReadWriteStore appDataReadWriteStore){
@@ -14,11 +19,13 @@ public class StartViewController
     }
 
     @FXML
-    private Label welcomeText;
-
-    @FXML
-    protected void onHelloButtonClick()
-    {
-        welcomeText.setText("Welcome to JavaFX Application!");
+    protected  void addRecipeButton(){
+        //Check to see if column is already too full to add another recipe into it.
+        if(leftRecipesButtonsColumn.getChildren().size() < 15){
+            leftRecipesButtonsColumn.getChildren().add(new Button(""));
+        } else if (rightRecipesButtonsColumn.getChildren().size() < 15)
+        {
+            rightRecipesButtonsColumn.getChildren().add(new Button(""));
+        }
     }
 }

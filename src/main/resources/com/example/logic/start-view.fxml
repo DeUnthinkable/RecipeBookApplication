@@ -15,7 +15,7 @@
    <items>
       <BorderPane prefHeight="200.0" prefWidth="200.0">
          <center>
-            <VBox prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER">
+            <VBox fx:id="leftRecipesButtonsColumn" prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER">
                <children>
                   <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="206.0" text="Button" />
                   <Button layoutX="10.0" layoutY="85.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="206.0" text="Button" />
@@ -36,7 +36,7 @@
                     <menus>
                       <Menu mnemonicParsing="false" text="Edit Mode...">
                         <items>
-                          <MenuItem mnemonicParsing="false" text="Add Recipe" />
+                          <MenuItem mnemonicParsing="false" onAction="#addRecipeButton" text="Add Recipe" />
                               <MenuItem mnemonicParsing="false" text="Delete Recipe" />
                               <MenuItem mnemonicParsing="false" text="Edit Name" />
                         </items>
@@ -49,7 +49,7 @@
       </BorderPane>
       <BorderPane prefHeight="200.0" prefWidth="200.0">
          <center>
-            <VBox prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER">
+            <VBox fx:id="rightRecipesButtonsColumn" prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER">
                <children>
                   <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="206.0" text="Button" />
                   <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="206.0" text="Button" />
