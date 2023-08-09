@@ -22,12 +22,12 @@ public class StartViewController
 
         //testing code
         for(int i = 0; i < 3; i++){
-            addRecipeButton();
+            addBlankRecipeButton();
         }
     }
 
     @FXML
-    protected  void addRecipeButton(){
+    protected  void addBlankRecipeButton(){
         //Check to see if column is already too full to add another recipe into it.
         if(leftRecipesButtonsColumn.getChildren().size() < 15){
             HBox hBox = createRecipeBox();
