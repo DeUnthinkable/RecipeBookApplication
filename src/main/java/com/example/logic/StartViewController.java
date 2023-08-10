@@ -3,10 +3,12 @@ package com.example.logic;
 import com.example.domain.Recipe;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
-import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
+
+import java.util.HashMap;
 
 public class StartViewController
 {
@@ -16,9 +18,11 @@ public class StartViewController
     private VBox rightRecipesButtonsColumn;
 
     private  AppDataReadWriteStore appDataReadWriteStore;
+    private HashMap<Button, Recipe> buttonRecipeHashMap;
 
     public void initData(AppDataReadWriteStore appDataReadWriteStore){
         this.appDataReadWriteStore = appDataReadWriteStore;
+        this.buttonRecipeHashMap = new HashMap<>();
 
         //testing code
         for(int i = 0; i < 3; i++){
@@ -29,21 +33,40 @@ public class StartViewController
     @FXML
     protected  void addBlankRecipeButton(){
         //Check to see if column is already too full to add another recipe into it.
+
+        HBox hBox = createRecipeBox();
+        Recipe recipe = new Recipe("");
+
+        if(leftRecipesButtonsColumn.getChildren().size() < 15){
+            leftRecipesButtonsColumn.getChildren().add(hBox);
+        } else if (rightRecipesButtonsColumn.getChildren().size() < 15) {
+            rightRecipesButtonsColumn.getChildren().add(hBox);
+        } else{
+            return;
+        }
+
+        appDataReadWriteStore.getRecipeList().addRecipe(recipe);
+        //Bad code
+        buttonRecipeHashMap.put((Button) hBox.getChildren().get(1), recipe);
+
+        updateData();
+    }
+
+
+
+    @FXML
+    protected void addExistingRecipeButton(){
         if(leftRecipesButtonsColumn.getChildren().size() < 15){
             HBox hBox = createRecipeBox();
-
             leftRecipesButtonsColumn.getChildren().add(hBox);
-            appDataReadWriteStore.getRecipeList().addRecipe(new Recipe(""));
-
         } else if (rightRecipesButtonsColumn.getChildren().size() < 15)
         {
             HBox hBox = createRecipeBox();
-
             rightRecipesButtonsColumn.getChildren().add(hBox);
-            appDataReadWriteStore.getRecipeList().addRecipe(new Recipe(""));
         }
         updateData();
     }
+
     private void updateData(){
         appDataReadWriteStore.writeIngredientsToFile();
         appDataReadWriteStore.writeRecipesToFile();
