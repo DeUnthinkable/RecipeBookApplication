@@ -1,13 +1,11 @@
-package com.example.controllers;
+package com.example.logic;
 
 import com.example.domain.Recipe;
-import com.example.logic.AppDataReadWriteStore;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
-import javafx.stage.Stage;
 
 import java.util.HashMap;
 

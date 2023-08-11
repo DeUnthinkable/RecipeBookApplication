@@ -1,24 +1,23 @@
-package com.example.controllers;
+package com.example.logic;
 
-import com.example.logic.RecipeBookApplication;
+import com.example.domain.Recipe;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
-import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 public class SceneController {
     private static Stage stage;
     private static Scene scene;
-    private static Parent root;
+    private static FXMLLoader root;
 
     public static void switchToStartView(ActionEvent event)
     {
         try {
-            root = FXMLLoader.load(RecipeBookApplication.class.getResource("start-view.fxml"));
+            root = new FXMLLoader(RecipeBookApplication.class.getResource("start-view.fxml"));
             stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-            scene = new Scene(root);
+            scene = new Scene(root.load());
             stage.setScene(scene);
             stage.show();
         } catch (Exception error){
@@ -30,9 +29,9 @@ public class SceneController {
     public static void switchToRecipeView(ActionEvent event)
     {
         try {
-        root = FXMLLoader.load(RecipeBookApplication.class.getResource("recipe-view.fxml"));
+        root = new FXMLLoader(RecipeBookApplication.class.getResource("recipe-view.fxml"));
         stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
-        scene = new Scene(root);
+        scene = new Scene(root.load());
         stage.setScene(scene);
         stage.show();
     } catch (Exception error){
