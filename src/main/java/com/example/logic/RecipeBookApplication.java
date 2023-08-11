@@ -1,6 +1,5 @@
 package com.example.logic;
 
-import com.example.controllers.StartViewController;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;

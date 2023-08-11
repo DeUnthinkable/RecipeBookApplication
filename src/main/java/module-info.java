@@ -8,6 +8,4 @@ module com.example.recipebookapplication {
     exports com.example.logic;
     exports com.example.domain;
     opens com.example.domain to javafx.fxml;
-    exports com.example.controllers;
-    opens com.example.controllers to javafx.fxml;
 }
