@@ -1,6 +1,7 @@
-package com.example.logic;
+package com.example.controllers;
 
 import com.example.domain.Recipe;
+import com.example.logic.AppDataReadWriteStore;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
@@ -17,7 +18,7 @@ public class StartViewController
     @FXML
     private VBox rightRecipesButtonsColumn;
 
-    private  AppDataReadWriteStore appDataReadWriteStore;
+    private AppDataReadWriteStore appDataReadWriteStore;
     private HashMap<Button, Recipe> buttonRecipeHashMap;
 
     public void initData(AppDataReadWriteStore appDataReadWriteStore){
@@ -83,6 +84,9 @@ public class StartViewController
 
         Button button = new Button("open");
         button.setOpacity(0);
+
+        button.setOnAction(event -> SceneController.switchToRecipeView(event));
+
         hBox.getChildren().add(button);
 
         hBox.setOnMouseEntered(event -> {
