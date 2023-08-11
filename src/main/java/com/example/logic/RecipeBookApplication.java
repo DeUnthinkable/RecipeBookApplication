@@ -1,21 +1,12 @@
 package com.example.logic;
 
-import com.example.domain.Ingredient;
-import com.example.domain.IngredientList;
-import com.example.domain.Recipe;
-import com.example.domain.RecipeList;
+import com.example.controllers.StartViewController;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 import java.io.IOException;
-import java.io.PrintWriter;
-import java.nio.file.Paths;
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Scanner;
 
 public class RecipeBookApplication extends Application
 {
