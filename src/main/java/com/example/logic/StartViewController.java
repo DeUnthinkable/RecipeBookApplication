@@ -83,7 +83,7 @@ public class StartViewController
         Button button = new Button("open");
         button.setOpacity(0);
 
-        button.setOnAction(event -> SceneController.switchToRecipeView(event));
+        button.setOnAction(event -> SceneController.switchToRecipeView(event, buttonRecipeHashMap.get(button)));
 
         hBox.getChildren().add(button);
 
