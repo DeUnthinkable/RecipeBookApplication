@@ -34,6 +34,7 @@ public class StartViewController
         HBox hBox = createRecipeControlField();
         Recipe recipe = new Recipe("");
 
+        //Check to see if column is already too full to add another recipe into it.
         if(leftRecipesButtonsColumn.getChildren().size() < 15){
             leftRecipesButtonsColumn.getChildren().add(hBox);
         } else if (rightRecipesButtonsColumn.getChildren().size() < 15) {
@@ -76,15 +77,19 @@ public class StartViewController
         TextField textField = new TextField();
         textField.setPrefWidth(240);
         textField.setPromptText("Recipe name:");
-        hBox.getChildren().add(textField);
 
         Button button = new Button("open");
         button.setOpacity(0);
 
-        button.setOnAction(event -> SceneController.switchToRecipeView(event, buttonRecipeHashMap.get(button)));
-
+        hBox.getChildren().add(textField);
         hBox.getChildren().add(button);
 
+        //Open recipe button handler
+        button.setOnAction(event -> SceneController.switchToRecipeView(event, buttonRecipeHashMap.get(button)));
+        //Updates recipe object's value to that of the text-field
+        textField.textProperty().addListener(event -> buttonRecipeHashMap.get(button).setRecipeName(textField.getText()));
+
+        //Functionality to let button show only on hover
         hBox.setOnMouseEntered(event -> {
             hBox.getChildren().get(1).setOpacity(1);
         });
@@ -94,5 +99,4 @@ public class StartViewController
 
         return hBox;
     }
-
 }
