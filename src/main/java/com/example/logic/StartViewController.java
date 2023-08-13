@@ -90,12 +90,8 @@ public class StartViewController
         textField.textProperty().addListener(event -> buttonRecipeHashMap.get(button).setRecipeName(textField.getText()));
 
         //Functionality to let button show only on hover
-        hBox.setOnMouseEntered(event -> {
-            hBox.getChildren().get(1).setOpacity(1);
-        });
-        hBox.setOnMouseExited(event -> {
-            hBox.getChildren().get(1).setOpacity(0);
-        });
+        hBox.setOnMouseEntered(event -> hBox.getChildren().get(1).setOpacity(1));
+        hBox.setOnMouseExited(event -> hBox.getChildren().get(1).setOpacity(0));
 
         return hBox;
     }
