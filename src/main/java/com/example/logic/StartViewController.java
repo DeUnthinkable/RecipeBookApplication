@@ -74,11 +74,11 @@ public class StartViewController
         appDataReadWriteStore.writeRecipesToFile();
     }
 
-    public HBox createRecipeControlField(){
+    public HBox createRecipeControlField(String recipeName){
         HBox hBox = new HBox();
         hBox.setSpacing(5);
 
-        TextField textField = new TextField();
+        TextField textField = new TextField(recipeName);
         textField.setPrefWidth(240);
         textField.setPromptText("Recipe name:");
 
@@ -98,5 +98,8 @@ public class StartViewController
         hBox.setOnMouseExited(event -> hBox.getChildren().get(1).setOpacity(0));
 
         return hBox;
+    }
+    public HBox createRecipeControlField(){
+        return createRecipeControlField("");
     }
 }
