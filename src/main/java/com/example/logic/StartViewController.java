@@ -31,9 +31,7 @@ public class StartViewController
 
     @FXML
     protected  void addBlankRecipeButton(){
-        //Check to see if column is already too full to add another recipe into it.
-
-        HBox hBox = createRecipeBox();
+        HBox hBox = createRecipeControlField();
         Recipe recipe = new Recipe("");
 
         if(leftRecipesButtonsColumn.getChildren().size() < 15){
@@ -56,11 +54,11 @@ public class StartViewController
     @FXML
     protected void addExistingRecipeButton(){
         if(leftRecipesButtonsColumn.getChildren().size() < 15){
-            HBox hBox = createRecipeBox();
+            HBox hBox = createRecipeControlField();
             leftRecipesButtonsColumn.getChildren().add(hBox);
         } else if (rightRecipesButtonsColumn.getChildren().size() < 15)
         {
-            HBox hBox = createRecipeBox();
+            HBox hBox = createRecipeControlField();
             rightRecipesButtonsColumn.getChildren().add(hBox);
         }
         updateData();
@@ -71,7 +69,7 @@ public class StartViewController
         appDataReadWriteStore.writeRecipesToFile();
     }
 
-    public HBox createRecipeBox(){
+    public HBox createRecipeControlField(){
         HBox hBox = new HBox();
         hBox.setSpacing(5);
 
