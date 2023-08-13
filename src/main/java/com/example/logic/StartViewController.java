@@ -17,11 +17,11 @@ public class StartViewController
     private VBox rightRecipesButtonsColumn;
 
     private AppDataReadWriteStore appDataReadWriteStore;
-    private HashMap<Button, Recipe> buttonRecipeHashMap;
+    private HashMap<HBox, Recipe> hBoxRecipeHashMap;
 
     public void initData(AppDataReadWriteStore appDataReadWriteStore){
         this.appDataReadWriteStore = appDataReadWriteStore;
-        this.buttonRecipeHashMap = new HashMap<>();
+        this.hBoxRecipeHashMap = new HashMap<>();
 
         //testing code
         for(int i = 0; i < 3; i++){
@@ -44,8 +44,7 @@ public class StartViewController
         }
 
         appDataReadWriteStore.getRecipeList().addRecipe(recipe);
-        //Bad code
-        buttonRecipeHashMap.put((Button) hBox.getChildren().get(1), recipe);
+        hBoxRecipeHashMap.put(hBox, recipe);
 
         updateData();
     }
@@ -85,9 +84,9 @@ public class StartViewController
         hBox.getChildren().add(button);
 
         //Open recipe button handler
-        button.setOnAction(event -> SceneController.switchToRecipeView(event, buttonRecipeHashMap.get(button)));
+        button.setOnAction(event -> SceneController.switchToRecipeView(event, hBoxRecipeHashMap.get(hBox)));
         //Updates recipe object's value to that of the text-field
-        textField.textProperty().addListener(event -> buttonRecipeHashMap.get(button).setRecipeName(textField.getText()));
+        textField.textProperty().addListener(event -> hBoxRecipeHashMap.get(hBox).setRecipeName(textField.getText()));
 
         //Functionality to let button show only on hover
         hBox.setOnMouseEntered(event -> hBox.getChildren().get(1).setOpacity(1));
