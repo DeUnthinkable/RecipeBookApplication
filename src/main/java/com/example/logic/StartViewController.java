@@ -24,36 +24,25 @@ public class StartViewController
         this.hBoxRecipeHashMap = new HashMap<>();
 
         //testing code
+        /*
         for(int i = 0; i < 3; i++){
-            addBlankRecipeButton();
+            Recipe recipe = new Recipe("some name");
+            addRecipeButton(recipe);
+            appDataReadWriteStore.getRecipeList().addRecipe(recipe);
         }
+        */
     }
 
     @FXML
-    protected  void addBlankRecipeButton(){
-        HBox hBox = createRecipeControlField();
+    public void addNewRecipe(){
         Recipe recipe = new Recipe("");
-
-        //Check to see if column is already too full to add another recipe into it.
-        if(leftRecipesButtonsColumn.getChildren().size() < 15){
-            leftRecipesButtonsColumn.getChildren().add(hBox);
-        } else if (rightRecipesButtonsColumn.getChildren().size() < 15) {
-            rightRecipesButtonsColumn.getChildren().add(hBox);
-        } else{
-            return;
-        }
-
+        addRecipeButton(recipe);
         appDataReadWriteStore.getRecipeList().addRecipe(recipe);
-        hBoxRecipeHashMap.put(hBox, recipe);
-
-        updateData();
     }
 
-
-
     @FXML
-    protected void addExistingRecipeButton(Recipe recipe){
-        HBox hBox = createRecipeControlField();
+    public void addRecipeButton(Recipe recipe){
+        HBox hBox = createRecipeControlField(recipe);
 
         //Check to see if column is already too full to add another recipe into it.
         if(leftRecipesButtonsColumn.getChildren().size() < 15){
@@ -74,11 +63,11 @@ public class StartViewController
         appDataReadWriteStore.writeRecipesToFile();
     }
 
-    public HBox createRecipeControlField(String recipeName){
+    public HBox createRecipeControlField(Recipe recipe){
         HBox hBox = new HBox();
         hBox.setSpacing(5);
 
-        TextField textField = new TextField(recipeName);
+        TextField textField = new TextField(recipe.getRecipeName());
         textField.setPrefWidth(240);
         textField.setPromptText("Recipe name:");
 
@@ -98,8 +87,5 @@ public class StartViewController
         hBox.setOnMouseExited(event -> hBox.getChildren().get(1).setOpacity(0));
 
         return hBox;
-    }
-    public HBox createRecipeControlField(){
-        return createRecipeControlField("");
     }
 }
