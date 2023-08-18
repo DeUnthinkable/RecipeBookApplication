@@ -84,6 +84,19 @@ public class StartViewController
 
         //Opens a recipe-view.fxml file based on the recipe
         openRecipeButton.setOnAction(event -> SceneController.switchToRecipeView(event, hBoxRecipeHashMap.get(hBox)));
+
+        //Deletes recipe from GUI and internal data structure
+        deleteRecipeButton.setOnAction(event -> {
+            HBox hBoxToDelete = (HBox)((Node)event.getSource()).getParent();
+            if(this.rightRecipesButtonsColumn.getChildren().contains(hBoxToDelete)){
+                this.rightRecipesButtonsColumn.getChildren().remove(hBoxToDelete);
+            } else if (this.leftRecipesButtonsColumn.getChildren().contains(hBoxToDelete)) {
+                this.leftRecipesButtonsColumn.getChildren().remove(hBoxToDelete);
+            }
+
+            appDataReadWriteStore.getRecipeList().remove(this.hBoxRecipeHashMap.get(hBox));
+        });
+
         //Updates recipe object's value to that of the text-field
         textField.textProperty().addListener(event -> hBoxRecipeHashMap.get(hBox).setRecipeName(textField.getText()));
 
