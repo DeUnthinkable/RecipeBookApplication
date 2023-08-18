@@ -25,10 +25,6 @@ public class AppDataReadWriteStore
 
         this.ingredientsFilePath = ingredientsFilePath;
         this.recipeFilePath = recipeFilePath;
-
-        //Preload past data entered by user
-        readIngredientsFromFile();
-        readRecipesFromFile();
     }
 
     public  RecipeList getRecipeList()

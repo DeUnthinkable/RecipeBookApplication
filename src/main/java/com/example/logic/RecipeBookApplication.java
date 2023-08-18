@@ -21,6 +21,9 @@ public class RecipeBookApplication extends Application
         Scene scene = new Scene(fxmlLoader.load(), 640, 480);
 
         AppDataReadWriteStore appDataReadWriteStore = new AppDataReadWriteStore("Ingredients.csv","Recipes.csv");
+        appDataReadWriteStore.readIngredientsFromFile();
+        appDataReadWriteStore.readRecipesFromFile();
+
         StartViewController controller = fxmlLoader.getController();
         controller.initData(appDataReadWriteStore);
 
