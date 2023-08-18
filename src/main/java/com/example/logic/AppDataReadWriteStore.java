@@ -5,7 +5,7 @@ import com.example.domain.IngredientList;
 import com.example.domain.Recipe;
 import com.example.domain.RecipeList;
 
-import java.io.PrintWriter;
+import java.io.*;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -89,11 +89,13 @@ public class AppDataReadWriteStore
             System.out.println(error.getStackTrace());
         }
     }
+
     public void writeRecipesToFile(){
         try(PrintWriter writer = new PrintWriter(recipeFilePath))
         {
-            StringBuilder record = new StringBuilder();
             for(int i = 0; i < recipeList.getRecipesNames().size(); i++){
+                StringBuilder record = new StringBuilder();
+
                 //Collecting information to add to record
                 Recipe recipe = recipeList.getRecipe(recipeList.getRecipesNames().get(i));
                 String recipeName = recipe.getRecipeName();
@@ -132,7 +134,6 @@ public class AppDataReadWriteStore
                 record.append(description);
 
                 writer.println(record);
-                writer.close();
             }
         }
         catch(Exception error){
