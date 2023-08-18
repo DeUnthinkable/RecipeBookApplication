@@ -17,7 +17,15 @@ public class SceneController {
         try {
             root = new FXMLLoader(RecipeBookApplication.class.getResource("start-view.fxml"));
             stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-            scene = new Scene(root.load());
+            scene = new Scene(root.load(), 640, 480);
+
+            AppDataReadWriteStore appDataReadWriteStore = new AppDataReadWriteStore("Ingredients.csv","Recipes.csv");
+            appDataReadWriteStore.readIngredientsFromFile();
+            appDataReadWriteStore.readRecipesFromFile();
+
+            StartViewController startViewController = root.getController();
+            startViewController.initData(appDataReadWriteStore);
+
             stage.setScene(scene);
             stage.show();
         } catch (Exception error){
@@ -37,6 +45,7 @@ public class SceneController {
 
         RecipeViewController controller = root.getController();
         controller.initData(recipe);
+
         } catch (Exception error){
         System.out.println(error.getMessage());
         error.printStackTrace();
