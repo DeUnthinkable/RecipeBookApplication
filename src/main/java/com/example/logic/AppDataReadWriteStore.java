@@ -64,7 +64,7 @@ public class AppDataReadWriteStore
 
 
     public void readIngredientsFromFile() {
-        try(Scanner scanner = new Scanner(Paths.get(ingredientsFilePath));)
+        try(Scanner scanner = new Scanner(Paths.get(ingredientsFilePath)))
         {
             while (scanner.hasNextLine())
             {
@@ -73,7 +73,7 @@ public class AppDataReadWriteStore
         }
         catch (Exception error){
             System.out.println(error.getMessage());
-            System.out.println(error.getStackTrace());
+            error.printStackTrace();
         }
     }
     public void writeIngredientsToFile(){
@@ -86,7 +86,7 @@ public class AppDataReadWriteStore
         }
         catch(Exception error){
             System.out.println(error.getMessage());
-            System.out.println(error.getStackTrace());
+            error.printStackTrace();
         }
     }
 
