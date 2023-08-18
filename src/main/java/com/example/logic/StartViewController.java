@@ -9,7 +9,6 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 
 import java.util.HashMap;
-import java.util.List;
 
 public class StartViewController
 {
@@ -37,8 +36,9 @@ public class StartViewController
     @FXML
     public void addNewRecipe(){
         Recipe recipe = new Recipe("");
-        addRecipeButton(recipe);
         appDataReadWriteStore.getRecipeList().addRecipe(recipe);
+        addRecipeButton(recipe);
+
     }
 
     @FXML
@@ -90,9 +90,7 @@ public class StartViewController
             HBox hBoxToDelete = (HBox)((Node)event.getSource()).getParent();
             if(this.rightRecipesButtonsColumn.getChildren().contains(hBoxToDelete)){
                 this.rightRecipesButtonsColumn.getChildren().remove(hBoxToDelete);
-            } else if (this.leftRecipesButtonsColumn.getChildren().contains(hBoxToDelete)) {
-                this.leftRecipesButtonsColumn.getChildren().remove(hBoxToDelete);
-            }
+            } else this.leftRecipesButtonsColumn.getChildren().remove(hBoxToDelete);
 
             appDataReadWriteStore.getRecipeList().remove(this.hBoxRecipeHashMap.get(hBox));
         });
