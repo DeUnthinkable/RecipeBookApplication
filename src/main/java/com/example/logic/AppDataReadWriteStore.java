@@ -5,7 +5,7 @@ import com.example.domain.IngredientList;
 import com.example.domain.Recipe;
 import com.example.domain.RecipeList;
 
-import java.io.PrintWriter;
+import java.io.*;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -25,10 +25,6 @@ public class AppDataReadWriteStore
 
         this.ingredientsFilePath = ingredientsFilePath;
         this.recipeFilePath = recipeFilePath;
-
-        //Preload past data entered by user
-        readIngredientsFromFile();
-        readRecipesFromFile();
     }
 
     public  RecipeList getRecipeList()
@@ -58,13 +54,13 @@ public class AppDataReadWriteStore
 
     public void setRecipeFilePath(String recipeFilePath)
     {
-        recipeFilePath = recipeFilePath;
+        this.recipeFilePath = recipeFilePath;
     }
 
 
 
     public void readIngredientsFromFile() {
-        try(Scanner scanner = new Scanner(Paths.get(ingredientsFilePath));)
+        try(Scanner scanner = new Scanner(Paths.get(ingredientsFilePath)))
         {
             while (scanner.hasNextLine())
             {
@@ -73,7 +69,7 @@ public class AppDataReadWriteStore
         }
         catch (Exception error){
             System.out.println(error.getMessage());
-            System.out.println(error.getStackTrace());
+            error.printStackTrace();
         }
     }
     public void writeIngredientsToFile(){
@@ -86,14 +82,16 @@ public class AppDataReadWriteStore
         }
         catch(Exception error){
             System.out.println(error.getMessage());
-            System.out.println(error.getStackTrace());
+            error.printStackTrace();
         }
     }
+
     public void writeRecipesToFile(){
         try(PrintWriter writer = new PrintWriter(recipeFilePath))
         {
-            StringBuilder record = new StringBuilder();
             for(int i = 0; i < recipeList.getRecipesNames().size(); i++){
+                StringBuilder record = new StringBuilder();
+
                 //Collecting information to add to record
                 Recipe recipe = recipeList.getRecipe(recipeList.getRecipesNames().get(i));
                 String recipeName = recipe.getRecipeName();
@@ -132,7 +130,6 @@ public class AppDataReadWriteStore
                 record.append(description);
 
                 writer.println(record);
-                writer.close();
             }
         }
         catch(Exception error){

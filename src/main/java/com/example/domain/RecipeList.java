@@ -33,4 +33,12 @@ public class RecipeList
         }
         return null;
     }
+
+    public Recipe get(int index){
+        return this.recipes.get(index);
+    }
+
+    public int size(){
+        return this.recipes.size();
+    }
 }
