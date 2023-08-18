@@ -8,6 +8,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 
 import java.util.HashMap;
+import java.util.List;
 
 public class StartViewController
 {
@@ -23,14 +24,13 @@ public class StartViewController
         this.appDataReadWriteStore = appDataReadWriteStore;
         this.hBoxRecipeHashMap = new HashMap<>();
 
-        //testing code
-        /*
-        for(int i = 0; i < 3; i++){
-            Recipe recipe = new Recipe("some name");
-            addRecipeButton(recipe);
-            appDataReadWriteStore.getRecipeList().addRecipe(recipe);
+        loadSavedRecipesButtons();
+    }
+
+    public void loadSavedRecipesButtons(){
+        for(int i = 0; i < this.appDataReadWriteStore.getRecipeList().size(); i++){
+            addRecipeButton(this.appDataReadWriteStore.getRecipeList().get(i));
         }
-        */
     }
 
     @FXML
