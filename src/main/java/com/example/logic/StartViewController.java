@@ -71,14 +71,13 @@ public class StartViewController
         textField.setPrefWidth(240);
         textField.setPromptText("Recipe name:");
 
-        Button button = new Button("open");
-        button.setOpacity(0);
+        Button openRecipeButton = new Button("open");
 
         hBox.getChildren().add(textField);
-        hBox.getChildren().add(button);
+        hBox.getChildren().add(openRecipeButton);
 
         //Open recipe button handler
-        button.setOnAction(event -> SceneController.switchToRecipeView(event, hBoxRecipeHashMap.get(hBox)));
+        openRecipeButton.setOnAction(event -> SceneController.switchToRecipeView(event, hBoxRecipeHashMap.get(hBox)));
         //Updates recipe object's value to that of the text-field
         textField.textProperty().addListener(event -> hBoxRecipeHashMap.get(hBox).setRecipeName(textField.getText()));
 
