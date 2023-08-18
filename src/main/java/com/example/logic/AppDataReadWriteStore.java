@@ -58,7 +58,7 @@ public class AppDataReadWriteStore
 
     public void setRecipeFilePath(String recipeFilePath)
     {
-        recipeFilePath = recipeFilePath;
+        this.recipeFilePath = recipeFilePath;
     }
 
 
