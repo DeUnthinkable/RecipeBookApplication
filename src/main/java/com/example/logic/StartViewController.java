@@ -2,6 +2,7 @@ package com.example.logic;
 
 import com.example.domain.Recipe;
 import javafx.fxml.FXML;
+import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.HBox;
@@ -68,15 +69,20 @@ public class StartViewController
         hBox.setSpacing(5);
 
         TextField textField = new TextField(recipe.getRecipeName());
-        textField.setPrefWidth(240);
+        textField.setPrefWidth(220);
         textField.setPromptText("Recipe name:");
 
         Button openRecipeButton = new Button("open");
+        openRecipeButton.setOpacity(0);
+
+        Button deleteRecipeButton = new Button("del.");
+        deleteRecipeButton.setOpacity(0);
 
         hBox.getChildren().add(textField);
         hBox.getChildren().add(openRecipeButton);
+        hBox.getChildren().add(deleteRecipeButton);
 
-        //Open recipe button handler
+        //Opens a recipe-view.fxml file based on the recipe
         openRecipeButton.setOnAction(event -> SceneController.switchToRecipeView(event, hBoxRecipeHashMap.get(hBox)));
         //Updates recipe object's value to that of the text-field
         textField.textProperty().addListener(event -> hBoxRecipeHashMap.get(hBox).setRecipeName(textField.getText()));
