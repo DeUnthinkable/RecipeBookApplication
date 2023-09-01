@@ -83,7 +83,10 @@ public class StartViewController
         hBox.getChildren().add(deleteRecipeButton);
 
         //Opens a recipe-view.fxml file based on the recipe
-        openRecipeButton.setOnAction(event -> SceneController.switchToRecipeView(event, hBoxRecipeHashMap.get(hBox)));
+        openRecipeButton.setOnAction(event -> {
+            SceneController.switchToRecipeView(event, hBoxRecipeHashMap.get(hBox));
+            updateData();
+        });
 
         //Deletes recipe from GUI and internal data structure
         deleteRecipeButton.setOnAction(event -> {

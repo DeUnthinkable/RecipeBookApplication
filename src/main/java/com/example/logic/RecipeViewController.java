@@ -32,7 +32,4 @@ public class RecipeViewController
 
         this.description.textProperty().addListener(event -> this.recipe.setDescription(this.description.getText()));
     }
-
-
-
 }
