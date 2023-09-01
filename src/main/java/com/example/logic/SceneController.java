@@ -11,6 +11,7 @@ public class SceneController {
     private static Stage stage;
     private static Scene scene;
     private static FXMLLoader root;
+    private static final AppDataReadWriteStore appDataReadWriteStore = new AppDataReadWriteStore("Ingredients.csv","Recipes.csv");
 
     public static void switchToStartView(ActionEvent event)
     {
@@ -19,7 +20,6 @@ public class SceneController {
             stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
             scene = new Scene(root.load(), 640, 480);
 
-            AppDataReadWriteStore appDataReadWriteStore = new AppDataReadWriteStore("Ingredients.csv","Recipes.csv");
             appDataReadWriteStore.readIngredientsFromFile();
             appDataReadWriteStore.readRecipesFromFile();
 
@@ -28,6 +28,11 @@ public class SceneController {
 
             stage.setScene(scene);
             stage.show();
+
+            stage.setOnCloseRequest(windowEvent -> {
+                appDataReadWriteStore.writeIngredientsToFile();
+                appDataReadWriteStore.writeRecipesToFile();
+            });
         } catch (Exception error){
             System.out.println(error.getMessage());
             error.printStackTrace();
@@ -37,18 +42,22 @@ public class SceneController {
     public static void switchToRecipeView(ActionEvent event, Recipe recipe)
     {
         try {
-        root = new FXMLLoader(RecipeBookApplication.class.getResource("recipe-view.fxml"));
-        stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
-        scene = new Scene(root.load());
-        stage.setScene(scene);
-        stage.show();
+            root = new FXMLLoader(RecipeBookApplication.class.getResource("recipe-view.fxml"));
+            stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
+            scene = new Scene(root.load());
+            stage.setScene(scene);
+            stage.show();
 
-        RecipeViewController controller = root.getController();
-        controller.initData(recipe);
+            RecipeViewController controller = root.getController();
+            controller.initData(recipe);
 
+            stage.setOnCloseRequest(windowEvent -> {
+                appDataReadWriteStore.writeIngredientsToFile();
+                appDataReadWriteStore.writeRecipesToFile();
+            });
         } catch (Exception error){
-        System.out.println(error.getMessage());
-        error.printStackTrace();
+            System.out.println(error.getMessage());
+            error.printStackTrace();
         }
     }
 }
