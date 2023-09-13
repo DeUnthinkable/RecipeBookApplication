@@ -12,8 +12,11 @@ target/
 *.iml
 *.ipr
 
-./Recipes.csv
-./Ingredients.csv
+### Unversioned Files ###
+Recipes.csv
+Ingredients.csv
+Notes
+Untitled.png
 ### Eclipse ###
 .apt_generated
 .classpath
