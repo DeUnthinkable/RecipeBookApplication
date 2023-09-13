@@ -41,4 +41,8 @@ public class RecipeList
     public int size(){
         return this.recipes.size();
     }
+
+    public void empty(){
+        recipes.stream().forEach(recipe -> remove(recipe));
+    }
 }
