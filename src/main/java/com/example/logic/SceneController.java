@@ -16,8 +16,17 @@ public class SceneController {
     public static void switchToStartView(ActionEvent event)
     {
         try {
-            root = new FXMLLoader(RecipeBookApplication.class.getResource("start-view.fxml"));
             stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            switchToStartView(stage);
+        } catch (Exception error){
+            System.out.println(error.getMessage());
+            error.printStackTrace();
+        }
+    }
+
+    public static void switchToStartView(Stage stage){
+        try {
+            root = new FXMLLoader(RecipeBookApplication.class.getResource("start-view.fxml"));
             scene = new Scene(root.load(), 640, 480);
 
             appDataReadWriteStore.readIngredientsFromFile();
