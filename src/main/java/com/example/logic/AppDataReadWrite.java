@@ -57,8 +57,9 @@ public class AppDataReadWrite
         try(PrintWriter writer = new PrintWriter(ingredientListFile))
         {
             List<String> ingredientsNames = ingredientList.getIngredientsNames().stream().toList();
-            for(int i = 0; i < ingredientsNames.size(); i++){
-                writer.println(ingredientsNames.get(i));
+            for (String ingredientsName : ingredientsNames)
+            {
+                writer.println(ingredientsName);
             }
         }
         catch(Exception error){
