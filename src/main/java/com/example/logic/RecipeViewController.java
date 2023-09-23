@@ -28,7 +28,7 @@ public class RecipeViewController
     }
 
     public void handlers(){
-        this.backToStartViewButton.setOnAction(event -> SceneController.switchToStartView(event));
+        this.backToStartViewButton.setOnAction(SceneController::switchToStartView);
 
         this.description.textProperty().addListener(event -> this.recipe.setDescription(this.description.getText()));
     }
