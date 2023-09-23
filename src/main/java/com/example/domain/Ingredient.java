@@ -4,7 +4,7 @@ import com.example.domain.Macronutrient;
 
 import java.util.Map;
 
-public class Ingredient implements HasCalories
+public class Ingredient
 {
     private String name;
     private String baseQuantity;
@@ -34,7 +34,6 @@ public class Ingredient implements HasCalories
         return this.nutritionFacts;
     }
 
-    @Override
     public int getCalories()
     {
         int carbCalories = this.nutritionFacts.getMacronutrientValue(Macronutrient.CARBOHYDRATE) * Macronutrient.CARBOHYDRATE.getCalories();
