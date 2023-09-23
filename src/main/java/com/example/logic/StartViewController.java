@@ -1,44 +1,50 @@
 package com.example.logic;
 
 import com.example.domain.Recipe;
+import com.example.domain.RecipeList;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 
+import java.net.URL;
 import java.util.HashMap;
+import java.util.ResourceBundle;
 
-public class StartViewController
+public class StartViewController implements Initializable
 {
     @FXML
     private VBox leftRecipesButtonsColumn;
     @FXML
     private VBox rightRecipesButtonsColumn;
 
-    private AppDataReadWriteStore appDataReadWriteStore;
+    private RecipeList recipeList;
     private HashMap<HBox, Recipe> hBoxRecipeHashMap;
 
-    public void initData(AppDataReadWriteStore appDataReadWriteStore){
-        this.appDataReadWriteStore = appDataReadWriteStore;
+    @Override
+    public void initialize(URL location, ResourceBundle resources)
+    {
+        this.recipeList = AppDataReadWrite.getRecipeListFromFile();
         this.hBoxRecipeHashMap = new HashMap<>();
 
         loadSavedRecipesButtons();
     }
 
     public void loadSavedRecipesButtons(){
-        for(int i = 0; i < this.appDataReadWriteStore.getRecipeList().size(); i++){
-            addRecipeButton(this.appDataReadWriteStore.getRecipeList().get(i));
+        for(int i = 0; i < this.recipeList.size(); i++){
+            addRecipeButton(this.recipeList.get(i));
         }
     }
 
     @FXML
     public void addNewRecipe(){
         Recipe recipe = new Recipe("");
-        appDataReadWriteStore.getRecipeList().addRecipe(recipe);
+        recipeList.addRecipe(recipe);
         addRecipeButton(recipe);
-
+        updateData();
     }
 
     @FXML
@@ -53,15 +59,11 @@ public class StartViewController
         } else{
             return;
         }
-
         hBoxRecipeHashMap.put(hBox, recipe);
-
-        updateData();
     }
 
     private void updateData(){
-        appDataReadWriteStore.writeIngredientsToFile();
-        appDataReadWriteStore.writeRecipesToFile();
+        AppDataReadWrite.writeRecipeListToFile(recipeList);
     }
 
     public HBox createRecipeControlField(Recipe recipe){
@@ -95,11 +97,15 @@ public class StartViewController
                 this.rightRecipesButtonsColumn.getChildren().remove(hBoxToDelete);
             } else this.leftRecipesButtonsColumn.getChildren().remove(hBoxToDelete);
 
-            appDataReadWriteStore.getRecipeList().remove(this.hBoxRecipeHashMap.get(hBox));
+            recipeList.remove(this.hBoxRecipeHashMap.get(hBox));
+            updateData();
         });
 
         //Updates recipe object's value to that of the text-field
-        textField.textProperty().addListener(event -> hBoxRecipeHashMap.get(hBox).setRecipeName(textField.getText()));
+        textField.textProperty().addListener(event -> {
+            hBoxRecipeHashMap.get(hBox).setRecipeName(textField.getText());
+            updateData();
+        });
 
         //Functionality to let button show only on hover
         hBox.setOnMouseEntered(event -> {
@@ -110,7 +116,6 @@ public class StartViewController
             hBox.getChildren().get(1).setOpacity(0);
             hBox.getChildren().get(2).setOpacity(0);
         });
-
         return hBox;
     }
 }
