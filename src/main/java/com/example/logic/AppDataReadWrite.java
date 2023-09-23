@@ -6,76 +6,57 @@ import com.example.domain.Recipe;
 import com.example.domain.RecipeList;
 
 import java.io.*;
-import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Scanner;
 
-public class AppDataReadWriteStore
+public class AppDataReadWrite
 {
-    private final RecipeList recipeList;
-    private final IngredientList allIngredientsList;
-    private String ingredientsFilePath;
-    private String recipeFilePath;
+    private static File ingredientListFile;
+    private static File recipeListFile;
 
-    public AppDataReadWriteStore(String ingredientsFilePath, String recipeFilePath){
-        recipeList = new RecipeList();
-        allIngredientsList = new IngredientList();
-
-        this.ingredientsFilePath = ingredientsFilePath;
-        this.recipeFilePath = recipeFilePath;
+    public static void init(File newIngredientsFilePath, File newRecipeFilePath){
+        ingredientListFile = newIngredientsFilePath;
+        recipeListFile = newRecipeFilePath;
     }
 
-    public  RecipeList getRecipeList()
+    public static File getIngredientListFile()
     {
-        return recipeList;
+        return ingredientListFile;
     }
-
-    public  IngredientList getAllIngredientsList()
+    public static void setIngredientListFile(File newIngredientsFilePath)
     {
-        return allIngredientsList;
+        ingredientListFile = newIngredientsFilePath;
     }
-
-    public String getIngredientsFilePath()
+    public static File getRecipeListFile()
     {
-        return ingredientsFilePath;
+        return recipeListFile;
     }
-
-    public void setIngredientsFilePath(String ingredientsFilePath)
+    public static void setRecipeListFile(File newRecipeFilePath)
     {
-        this.ingredientsFilePath = ingredientsFilePath;
+        recipeListFile = newRecipeFilePath;
     }
 
-    public String getRecipeFilePath()
-    {
-        return recipeFilePath;
-    }
-
-    public void setRecipeFilePath(String recipeFilePath)
-    {
-        this.recipeFilePath = recipeFilePath;
-    }
-
-
-
-    public void readIngredientsFromFile() {
-        try(Scanner scanner = new Scanner(Paths.get(ingredientsFilePath)))
+    public static IngredientList getIngredientListFromFile() {
+        IngredientList ingredientList = new IngredientList();
+        try(Scanner scanner = new Scanner(ingredientListFile))
         {
             while (scanner.hasNextLine())
             {
-                this.allIngredientsList.add(new Ingredient(scanner.nextLine()));
+                ingredientList.add(new Ingredient(scanner.nextLine()));
             }
         }
         catch (Exception error){
             System.out.println(error.getMessage());
             error.printStackTrace();
         }
+        return ingredientList;
     }
-    public void writeIngredientsToFile(){
-        try(PrintWriter writer = new PrintWriter(ingredientsFilePath))
+    public static void writeIngredientListToFile(IngredientList ingredientList){
+        try(PrintWriter writer = new PrintWriter(ingredientListFile))
         {
-            List<String> ingredientsNames = allIngredientsList.getIngredientsNames().stream().toList();
+            List<String> ingredientsNames = ingredientList.getIngredientsNames().stream().toList();
             for(int i = 0; i < ingredientsNames.size(); i++){
                 writer.println(ingredientsNames.get(i));
             }
@@ -86,8 +67,8 @@ public class AppDataReadWriteStore
         }
     }
 
-    public void writeRecipesToFile(){
-        try(PrintWriter writer = new PrintWriter(recipeFilePath))
+    public static void writeRecipeListToFile(RecipeList recipeList){
+        try(PrintWriter writer = new PrintWriter(recipeListFile))
         {
             for(int i = 0; i < recipeList.getRecipesNames().size(); i++){
                 StringBuilder record = new StringBuilder();
@@ -138,10 +119,11 @@ public class AppDataReadWriteStore
         }
     }
 
-    public void readRecipesFromFile(){
+    public static RecipeList getRecipeListFromFile(){
+        RecipeList recipeList = new RecipeList();
         //Empty the recipe list before reading the new recipe list
         recipeList.empty();
-        try(Scanner scanner = new Scanner(Paths.get(recipeFilePath))){
+        try(Scanner scanner = new Scanner(recipeListFile)){
             while(scanner.hasNextLine()){
                 String[] record = scanner.nextLine().split(",",48);
 
@@ -165,5 +147,6 @@ public class AppDataReadWriteStore
             System.out.println(error.getMessage());
             error.printStackTrace();
         }
+        return recipeList;
     }
 }
