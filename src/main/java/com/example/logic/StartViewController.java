@@ -2,6 +2,7 @@ package com.example.logic;
 
 import com.example.domain.Recipe;
 import com.example.domain.RecipeList;
+import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
@@ -33,7 +34,7 @@ public class StartViewController implements Initializable
         loadSavedRecipesButtons();
     }
 
-    public void loadSavedRecipesButtons(){
+    private void loadSavedRecipesButtons(){
         for(int i = 0; i < this.recipeList.size(); i++){
             addRecipeButton(this.recipeList.get(i));
         }
@@ -62,11 +63,7 @@ public class StartViewController implements Initializable
         hBoxRecipeHashMap.put(hBox, recipe);
     }
 
-    private void updateData(){
-        AppDataReadWrite.writeRecipeListToFile(recipeList);
-    }
-
-    public HBox createRecipeControlField(Recipe recipe){
+    private HBox createRecipeControlField(Recipe recipe){
         HBox hBox = new HBox();
         hBox.setSpacing(5);
 
@@ -92,12 +89,7 @@ public class StartViewController implements Initializable
 
         //Deletes recipe from GUI and internal data structure
         deleteRecipeButton.setOnAction(event -> {
-            HBox hBoxToDelete = (HBox)((Node)event.getSource()).getParent();
-            if(this.rightRecipesButtonsColumn.getChildren().contains(hBoxToDelete)){
-                this.rightRecipesButtonsColumn.getChildren().remove(hBoxToDelete);
-            } else this.leftRecipesButtonsColumn.getChildren().remove(hBoxToDelete);
-
-            recipeList.remove(this.hBoxRecipeHashMap.get(hBox));
+            removeRecipe(event);
             updateData();
         });
 
@@ -117,5 +109,18 @@ public class StartViewController implements Initializable
             hBox.getChildren().get(2).setOpacity(0);
         });
         return hBox;
+    }
+
+    private void removeRecipe(Event event){
+        HBox hBoxToDelete = (HBox)((Node)event.getSource()).getParent();
+        if(this.rightRecipesButtonsColumn.getChildren().contains(hBoxToDelete)){
+            this.rightRecipesButtonsColumn.getChildren().remove(hBoxToDelete);
+        } else this.leftRecipesButtonsColumn.getChildren().remove(hBoxToDelete);
+
+        recipeList.remove(this.hBoxRecipeHashMap.get(hBoxToDelete));
+    }
+
+    private void updateData(){
+        AppDataReadWrite.writeRecipeListToFile(recipeList);
     }
 }
