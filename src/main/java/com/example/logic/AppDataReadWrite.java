@@ -70,11 +70,11 @@ public class AppDataReadWrite
     public static void writeRecipeListToFile(ArrayList<Recipe> recipeList){
         try(PrintWriter writer = new PrintWriter(recipeListFile))
         {
-            for(int i = 0; i < recipeList.size(); i++){
+            for(Recipe recipe : recipeList)
+            {
                 StringBuilder record = new StringBuilder();
 
                 //Collecting information to add to record
-                Recipe recipe = recipeList.get(i);
                 String recipeName = recipe.getRecipeName();
                 Iterator<String> ingredients = recipe.getIngredientsList().getIngredientsNames().stream().toList().iterator();
                 Iterator<String> steps = recipe.getRecipeSteps().iterator();
@@ -121,8 +121,6 @@ public class AppDataReadWrite
 
     public static ArrayList<Recipe> getRecipeListFromFile(){
         ArrayList<Recipe> recipeList = new ArrayList<>();
-        //Empty the recipe list before reading the new recipe list
-        recipeList.clear();
         try(Scanner scanner = new Scanner(recipeListFile)){
             while(scanner.hasNextLine()){
                 String[] record = scanner.nextLine().split(",",48);
