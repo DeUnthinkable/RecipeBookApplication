@@ -1,7 +1,6 @@
 package com.example.logic;
 
 import com.example.domain.Recipe;
-import com.example.domain.RecipeList;
 import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -12,6 +11,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.ResourceBundle;
 
@@ -22,7 +22,7 @@ public class StartViewController implements Initializable
     @FXML
     private VBox rightRecipesButtonsColumn;
 
-    private RecipeList recipeList;
+    private ArrayList<Recipe> recipeList;
     private HashMap<HBox, Recipe> hBoxRecipeHashMap;
 
     @Override
@@ -43,7 +43,7 @@ public class StartViewController implements Initializable
     @FXML
     public void addNewRecipe(){
         Recipe recipe = new Recipe("");
-        recipeList.addRecipe(recipe);
+        recipeList.add(recipe);
         addRecipeButton(recipe);
         updateData();
     }

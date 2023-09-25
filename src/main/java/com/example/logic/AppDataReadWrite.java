@@ -3,7 +3,6 @@ package com.example.logic;
 import com.example.domain.Ingredient;
 import com.example.domain.IngredientList;
 import com.example.domain.Recipe;
-import com.example.domain.RecipeList;
 
 import java.io.*;
 import java.util.ArrayList;
@@ -68,14 +67,14 @@ public class AppDataReadWrite
         }
     }
 
-    public static void writeRecipeListToFile(RecipeList recipeList){
+    public static void writeRecipeListToFile(ArrayList<Recipe> recipeList){
         try(PrintWriter writer = new PrintWriter(recipeListFile))
         {
-            for(int i = 0; i < recipeList.getRecipesNames().size(); i++){
+            for(int i = 0; i < recipeList.size(); i++){
                 StringBuilder record = new StringBuilder();
 
                 //Collecting information to add to record
-                Recipe recipe = recipeList.getRecipe(recipeList.getRecipesNames().get(i));
+                Recipe recipe = recipeList.get(i);
                 String recipeName = recipe.getRecipeName();
                 Iterator<String> ingredients = recipe.getIngredientsList().getIngredientsNames().stream().toList().iterator();
                 Iterator<String> steps = recipe.getRecipeSteps().iterator();
@@ -120,16 +119,16 @@ public class AppDataReadWrite
         }
     }
 
-    public static RecipeList getRecipeListFromFile(){
-        RecipeList recipeList = new RecipeList();
+    public static ArrayList<Recipe> getRecipeListFromFile(){
+        ArrayList<Recipe> recipeList = new ArrayList<>();
         //Empty the recipe list before reading the new recipe list
-        recipeList.empty();
+        recipeList.clear();
         try(Scanner scanner = new Scanner(recipeListFile)){
             while(scanner.hasNextLine()){
                 String[] record = scanner.nextLine().split(",",48);
 
                 Recipe recipe = new Recipe(record[0]);
-                recipeList.addRecipe(recipe);
+                recipeList.add(recipe);
                 for(int i = 1; i < 31 && !record[i].equals(""); i+=2) {
                     recipe.getIngredientsList().add(new Ingredient(record[i]), Integer.parseInt(record[i+1]));
                 }
