@@ -98,7 +98,6 @@ public class StartViewController implements Initializable
             hBoxRecipeHashMap.get(hBox).setRecipeName(textField.getText());
             updateData();
         });
-
         //Functionality to let button show only on hover
         hBox.setOnMouseEntered(event -> {
             hBox.getChildren().get(1).setOpacity(1);

@@ -27,6 +27,7 @@ public class SceneController {
         try {
             root = new FXMLLoader(RecipeBookApplication.class.getResource("start-view.fxml"));
             scene = new Scene(root.load(), 640, 480);
+            scene.getStylesheets().add(RecipeBookApplication.class.getResource("start-view.css").toExternalForm());
 
             stage.setScene(scene);
             stage.show();
@@ -42,6 +43,8 @@ public class SceneController {
             root = new FXMLLoader(RecipeBookApplication.class.getResource("recipe-view.fxml"));
             stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
             scene = new Scene(root.load());
+            scene.getStylesheets().add(RecipeBookApplication.class.getResource("recipe-view.css").toExternalForm());
+
             stage.setScene(scene);
             stage.show();
 
