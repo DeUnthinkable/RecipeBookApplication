@@ -56,4 +56,24 @@ public class Recipe
     {
         this.description = description;
     }
+
+
+    @Override
+    public boolean equals(Object o)
+    {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Recipe recipe = (Recipe) o;
+        return prepTime == recipe.prepTime
+                && recipeName.equals(recipe.recipeName)
+                && ingredientListWithAmounts.equals(recipe.ingredientListWithAmounts)
+                && recipeSteps.equals(recipe.recipeSteps)
+                && description.equals(recipe.description);
+    }
+
+    @Override
+    public int hashCode()
+    {
+        return getRecipeName().hashCode();
+    }
 }
