@@ -37,7 +37,7 @@ public class SceneController {
         }
     }
 
-    public static void switchToRecipeView(ActionEvent event, Recipe recipe)
+    public static void switchToRecipeView(ActionEvent event, String recipeName)
     {
         try {
             root = new FXMLLoader(RecipeBookApplication.class.getResource("recipe-view.fxml"));
@@ -49,7 +49,7 @@ public class SceneController {
             stage.show();
 
             RecipeViewController controller = root.getController();
-            controller.initData(recipe);
+            controller.initData(recipeName);
 
         } catch (Exception error){
             System.out.println(error.getMessage());

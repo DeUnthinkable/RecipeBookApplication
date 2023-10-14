@@ -6,10 +6,15 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+
 
 public class RecipeViewController
 {
     private Recipe recipe;
+    private ArrayList<Recipe> recipeList;
+    private IngredientListWithAmounts ingredientsList;
     @FXML
     private TextArea description;
     @FXML
@@ -18,8 +23,15 @@ public class RecipeViewController
     private Label recipeName;
 
 
-    public void initData(Recipe recipe){
-        this.recipe = recipe;
+    public void initData(String recipeName){
+        this.recipeList = AppDataReadWrite.getRecipeListFromFile();
+        for(int i = 0; i < recipeList.size(); i++){
+            if(recipeList.get(i).getRecipeName().equals(recipeName)){
+                this.recipe = recipeList.get(i);
+            }
+        }
+
+        this.ingredientsList = recipe.getIngredientsList();
 
         this.recipeName.setText(recipe.getRecipeName());
         this.description.setText(recipe.getDescription());
