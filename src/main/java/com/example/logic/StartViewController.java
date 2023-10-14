@@ -83,7 +83,7 @@ public class StartViewController implements Initializable
 
         //Opens a recipe-view.fxml file based on the recipe
         openRecipeButton.setOnAction(event -> {
-            SceneController.switchToRecipeView(event, hBoxRecipeHashMap.get(hBox));
+            SceneController.switchToRecipeView(event, hBoxRecipeHashMap.get(hBox).getRecipeName());
             updateData();
         });
 
