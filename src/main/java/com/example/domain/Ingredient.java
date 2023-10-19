@@ -1,9 +1,5 @@
 package com.example.domain;
 
-import com.example.domain.Macronutrient;
-
-import java.util.Map;
-
 public class Ingredient
 {
     private String name;

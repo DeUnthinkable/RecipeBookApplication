@@ -1,6 +1,5 @@
 package com.example.logic;
 
-import com.example.domain.Recipe;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;

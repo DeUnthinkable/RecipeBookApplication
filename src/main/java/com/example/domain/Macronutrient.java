@@ -6,9 +6,9 @@ public enum Macronutrient
     CARBOHYDRATE(4),
     FAT(9);
 
-    private int calories;
+    private final int calories;
 
-    private Macronutrient(int calories){
+    Macronutrient(int calories){
         this.calories = calories;
     }
 

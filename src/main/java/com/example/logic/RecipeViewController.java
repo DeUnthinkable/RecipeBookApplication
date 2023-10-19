@@ -25,9 +25,11 @@ public class RecipeViewController
 
     public void initData(String recipeName){
         this.recipeList = AppDataReadWrite.getRecipeListFromFile();
-        for(int i = 0; i < recipeList.size(); i++){
-            if(recipeList.get(i).getRecipeName().equals(recipeName)){
-                this.recipe = recipeList.get(i);
+        for (Recipe recipe : recipeList)
+        {
+            if (recipe.getRecipeName().equals(recipeName))
+            {
+                this.recipe = recipe;
             }
         }
 

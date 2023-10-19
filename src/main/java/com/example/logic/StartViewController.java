@@ -35,8 +35,9 @@ public class StartViewController implements Initializable
     }
 
     private void loadSavedRecipesButtons(){
-        for(int i = 0; i < this.recipeList.size(); i++){
-            addRecipeButton(this.recipeList.get(i));
+        for (Recipe recipe : this.recipeList)
+        {
+            addRecipeButton(recipe);
         }
     }
 

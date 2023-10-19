@@ -28,7 +28,7 @@ public class IngredientList
     public int getCalories()
     {
         return nameIngredientMap.values().stream()
-                .map(ingredient -> ingredient.getCalories())
+                .map(Ingredient::getCalories)
                 .reduce(0, Integer::sum);
     }
 
