@@ -128,7 +128,8 @@ public class AppDataReadWrite
                 Recipe recipe = new Recipe(record[0]);
                 recipeList.add(recipe);
                 for(int i = 1; i < 31 && !record[i].equals(""); i+=2) {
-                    recipe.getIngredientsList().add(new Ingredient(record[i]), Integer.parseInt(record[i+1]));
+                    int ingredientAmount = record[i+1].isBlank() || record[i+1].isEmpty() ? 0 : Integer.parseInt(record[i+1]);
+                    recipe.getIngredientsList().add(new Ingredient(record[i]),ingredientAmount);
                 }
 
                 List<String> recipeSteps = new ArrayList<>();
@@ -137,7 +138,8 @@ public class AppDataReadWrite
                 }
                 recipe.setRecipeSteps(recipeSteps);
 
-                recipe.setPrepTime(Integer.parseInt(record[46]));
+                int prepTime = record[46].isEmpty() || record[46].isBlank() ? 0 : Integer.parseInt(record[46]);
+                recipe.setPrepTime(prepTime);
                 recipe.setDescription(record[47]);
             }
         }
