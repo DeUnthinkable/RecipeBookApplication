@@ -5,14 +5,14 @@ import java.util.*;
 public class Recipe
 {
     private String recipeName;
-    private IngredientListWithAmounts ingredientListWithAmounts;
+    private HashMap<String, Integer> ingredientNameAndAmountMap;
     private List<String> recipeSteps;
     private int prepTime;
     private String description;
 
     public Recipe(String recipeName){
         this.recipeName = recipeName;
-        this.ingredientListWithAmounts = new IngredientListWithAmounts();
+        this.ingredientNameAndAmountMap = new HashMap<>();
         this.recipeSteps = new ArrayList<>();
         this.prepTime = 0;
         this.description = "";
@@ -26,8 +26,12 @@ public class Recipe
         this.recipeName = recipeName;
     }
 
-    public IngredientListWithAmounts getIngredientsList(){
-        return this.ingredientListWithAmounts;
+    public HashMap<String, Integer> getIngredientNameAndAmountMap(){
+        return this.ingredientNameAndAmountMap;
+    }
+
+    public void setIngredientNameAndAmountMap(HashMap<String, Integer> ingredientNameAndAmountMap){
+        this.ingredientNameAndAmountMap = ingredientNameAndAmountMap;
     }
 
     public List<String> getRecipeSteps() {
@@ -66,7 +70,7 @@ public class Recipe
         Recipe recipe = (Recipe) o;
         return prepTime == recipe.prepTime
                 && recipeName.equals(recipe.recipeName)
-                && ingredientListWithAmounts.equals(recipe.ingredientListWithAmounts)
+                && ingredientNameAndAmountMap.equals(recipe.ingredientNameAndAmountMap)
                 && recipeSteps.equals(recipe.recipeSteps)
                 && description.equals(recipe.description);
     }
