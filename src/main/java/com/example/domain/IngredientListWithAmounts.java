@@ -42,8 +42,7 @@ public class IngredientListWithAmounts extends IngredientList
     public int getTotalMacronutrientValue(Macronutrient macronutrient){
         return   nameIngredientAmountMap.keySet().stream()
                 .map(this::getIngredient)
-                .map(Ingredient::getNutritionFacts)
-                .map(nutritionFacts -> nutritionFacts.getMacronutrientValue(macronutrient))
+                .map(ingredient -> ingredient.getMacronutrientValue(macronutrient))
                 .reduce(0, Integer::sum);
     }
 }
