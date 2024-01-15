@@ -76,7 +76,7 @@ public class AppDataReadWrite
 
                 //Collecting information to add to record
                 String recipeName = recipe.getRecipeName();
-                Iterator<String> ingredients = recipe.getIngredientsList().getIngredientsNames().stream().toList().iterator();
+                Iterator<String> ingredients = recipe.getIngredientNameAndAmountMap().keySet().stream().toList().iterator();
                 Iterator<String> steps = recipe.getRecipeSteps().iterator();
                 int prepTime = recipe.getPrepTime();
                 String description = recipe.getDescription();
@@ -93,7 +93,7 @@ public class AppDataReadWrite
                     }
                     record.append(",");
                     if(hasNextIngredient){
-                        record.append(recipe.getIngredientsList().getIngredientAmount(ingredientName));
+                        record.append(recipe.getIngredientNameAndAmountMap().get(ingredientName));
                     }
                     record.append(",");
                 }
@@ -129,7 +129,7 @@ public class AppDataReadWrite
                 recipeList.add(recipe);
                 for(int i = 1; i < 31 && !record[i].equals(""); i+=2) {
                     int ingredientAmount = record[i+1].isBlank() || record[i+1].isEmpty() ? 0 : Integer.parseInt(record[i+1]);
-                    recipe.getIngredientsList().add(new Ingredient(record[i]),ingredientAmount);
+                    recipe.getIngredientNameAndAmountMap().put(record[i],ingredientAmount);
                 }
 
                 List<String> recipeSteps = new ArrayList<>();
