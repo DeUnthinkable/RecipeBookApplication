@@ -1,7 +1,5 @@
 package com.example.logic;
 
-import com.example.domain.Ingredient;
-import com.example.domain.IngredientList;
 import com.example.domain.Recipe;
 
 import java.io.*;
@@ -12,22 +10,12 @@ import java.util.Scanner;
 
 public class AppDataReadWrite
 {
-    private static File ingredientListFile;
     private static File recipeListFile;
 
-    public static void init(File newIngredientsFilePath, File newRecipeFilePath){
-        ingredientListFile = newIngredientsFilePath;
+    public static void init(File newRecipeFilePath){
         recipeListFile = newRecipeFilePath;
     }
 
-    public static File getIngredientListFile()
-    {
-        return ingredientListFile;
-    }
-    public static void setIngredientListFile(File newIngredientsFilePath)
-    {
-        ingredientListFile = newIngredientsFilePath;
-    }
     public static File getRecipeListFile()
     {
         return recipeListFile;
@@ -35,36 +23,6 @@ public class AppDataReadWrite
     public static void setRecipeListFile(File newRecipeFilePath)
     {
         recipeListFile = newRecipeFilePath;
-    }
-
-    public static IngredientList getIngredientListFromFile() {
-        IngredientList ingredientList = new IngredientList();
-        try(Scanner scanner = new Scanner(ingredientListFile))
-        {
-            while (scanner.hasNextLine())
-            {
-                ingredientList.add(new Ingredient(scanner.nextLine()));
-            }
-        }
-        catch (Exception error){
-            System.out.println(error.getMessage());
-            error.printStackTrace();
-        }
-        return ingredientList;
-    }
-    public static void writeIngredientListToFile(IngredientList ingredientList){
-        try(PrintWriter writer = new PrintWriter(ingredientListFile))
-        {
-            List<String> ingredientsNames = ingredientList.getIngredientsNames().stream().toList();
-            for (String ingredientsName : ingredientsNames)
-            {
-                writer.println(ingredientsName);
-            }
-        }
-        catch(Exception error){
-            System.out.println(error.getMessage());
-            error.printStackTrace();
-        }
     }
 
     public static void writeRecipeListToFile(ArrayList<Recipe> recipeList){
