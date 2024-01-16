@@ -1,6 +1,5 @@
 package com.example.logic;
 
-import com.example.domain.IngredientListWithAmounts;
 import com.example.domain.Recipe;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -9,13 +8,14 @@ import javafx.scene.control.ListView;
 import javafx.scene.control.TextArea;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 
 public class RecipeViewController
 {
     private Recipe recipe;
     private ArrayList<Recipe> recipeList;
-    private IngredientListWithAmounts ingredientsList;
+    private HashMap<String, Integer> ingredientNameAndAmountMap;
     @FXML
     private TextArea description;
     @FXML
@@ -36,7 +36,7 @@ public class RecipeViewController
             }
         }
 
-        this.ingredientsList = recipe.getIngredientsList();
+        this.ingredientNameAndAmountMap = recipe.getIngredientNameAndAmountMap();
 
         this.recipeName.setText(recipe.getRecipeName());
         this.description.setText(recipe.getDescription());
@@ -46,7 +46,7 @@ public class RecipeViewController
         dataChangeHandlers();
 
         //test
-        ingredientsList.getIngredientsNames().forEach(ingredientName -> ingredientListView.getItems().add(ingredientName));
+        ingredientNameAndAmountMap.keySet().forEach(ingredientName -> ingredientListView.getItems().add(ingredientName));
     }
 
     public void navigationHandlers(){

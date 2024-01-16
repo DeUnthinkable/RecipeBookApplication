@@ -1,7 +1,5 @@
 package com.example.logic;
 
-import com.example.domain.Ingredient;
-import com.example.domain.IngredientList;
 import com.example.domain.Recipe;
 
 import java.io.*;
@@ -12,22 +10,12 @@ import java.util.Scanner;
 
 public class AppDataReadWrite
 {
-    private static File ingredientListFile;
     private static File recipeListFile;
 
-    public static void init(File newIngredientsFilePath, File newRecipeFilePath){
-        ingredientListFile = newIngredientsFilePath;
+    public static void init(File newRecipeFilePath){
         recipeListFile = newRecipeFilePath;
     }
 
-    public static File getIngredientListFile()
-    {
-        return ingredientListFile;
-    }
-    public static void setIngredientListFile(File newIngredientsFilePath)
-    {
-        ingredientListFile = newIngredientsFilePath;
-    }
     public static File getRecipeListFile()
     {
         return recipeListFile;
@@ -35,36 +23,6 @@ public class AppDataReadWrite
     public static void setRecipeListFile(File newRecipeFilePath)
     {
         recipeListFile = newRecipeFilePath;
-    }
-
-    public static IngredientList getIngredientListFromFile() {
-        IngredientList ingredientList = new IngredientList();
-        try(Scanner scanner = new Scanner(ingredientListFile))
-        {
-            while (scanner.hasNextLine())
-            {
-                ingredientList.add(new Ingredient(scanner.nextLine()));
-            }
-        }
-        catch (Exception error){
-            System.out.println(error.getMessage());
-            error.printStackTrace();
-        }
-        return ingredientList;
-    }
-    public static void writeIngredientListToFile(IngredientList ingredientList){
-        try(PrintWriter writer = new PrintWriter(ingredientListFile))
-        {
-            List<String> ingredientsNames = ingredientList.getIngredientsNames().stream().toList();
-            for (String ingredientsName : ingredientsNames)
-            {
-                writer.println(ingredientsName);
-            }
-        }
-        catch(Exception error){
-            System.out.println(error.getMessage());
-            error.printStackTrace();
-        }
     }
 
     public static void writeRecipeListToFile(ArrayList<Recipe> recipeList){
@@ -76,7 +34,7 @@ public class AppDataReadWrite
 
                 //Collecting information to add to record
                 String recipeName = recipe.getRecipeName();
-                Iterator<String> ingredients = recipe.getIngredientsList().getIngredientsNames().stream().toList().iterator();
+                Iterator<String> ingredients = recipe.getIngredientNameAndAmountMap().keySet().stream().toList().iterator();
                 Iterator<String> steps = recipe.getRecipeSteps().iterator();
                 int prepTime = recipe.getPrepTime();
                 String description = recipe.getDescription();
@@ -93,7 +51,7 @@ public class AppDataReadWrite
                     }
                     record.append(",");
                     if(hasNextIngredient){
-                        record.append(recipe.getIngredientsList().getIngredientAmount(ingredientName));
+                        record.append(recipe.getIngredientNameAndAmountMap().get(ingredientName));
                     }
                     record.append(",");
                 }
@@ -129,7 +87,7 @@ public class AppDataReadWrite
                 recipeList.add(recipe);
                 for(int i = 1; i < 31 && !record[i].equals(""); i+=2) {
                     int ingredientAmount = record[i+1].isBlank() || record[i+1].isEmpty() ? 0 : Integer.parseInt(record[i+1]);
-                    recipe.getIngredientsList().add(new Ingredient(record[i]),ingredientAmount);
+                    recipe.getIngredientNameAndAmountMap().put(record[i],ingredientAmount);
                 }
 
                 List<String> recipeSteps = new ArrayList<>();
