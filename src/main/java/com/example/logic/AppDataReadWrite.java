@@ -34,7 +34,7 @@ public class AppDataReadWrite
 
                 //Collecting information to add to record
                 String recipeName = recipe.getRecipeName();
-                Iterator<String> ingredients = recipe.getIngredientNameAndAmountMap().keySet().stream().toList().iterator();
+                Iterator<String> ingredients = recipe.getIngredientList().stream().toList().iterator();
                 Iterator<String> steps = recipe.getRecipeSteps().iterator();
                 int prepTime = recipe.getPrepTime();
                 String description = recipe.getDescription();
@@ -48,10 +48,6 @@ public class AppDataReadWrite
                     if(hasNextIngredient){
                         ingredientName = ingredients.next();
                         record.append(ingredientName);
-                    }
-                    record.append(",");
-                    if(hasNextIngredient){
-                        record.append(recipe.getIngredientNameAndAmountMap().get(ingredientName));
                     }
                     record.append(",");
                 }
@@ -81,24 +77,23 @@ public class AppDataReadWrite
         ArrayList<Recipe> recipeList = new ArrayList<>();
         try(Scanner scanner = new Scanner(recipeListFile)){
             while(scanner.hasNextLine()){
-                String[] record = scanner.nextLine().split(",",48);
+                String[] record = scanner.nextLine().split(",",33);
 
                 Recipe recipe = new Recipe(record[0]);
                 recipeList.add(recipe);
-                for(int i = 1; i < 31 && !record[i].equals(""); i+=2) {
-                    int ingredientAmount = record[i+1].isBlank() || record[i+1].isEmpty() ? 0 : Integer.parseInt(record[i+1]);
-                    recipe.getIngredientNameAndAmountMap().put(record[i],ingredientAmount);
+                for(int i = 1; i < 16 && !record[i].equals(""); i++) {
+                    recipe.getIngredientList().add(record[i]);
                 }
 
                 List<String> recipeSteps = new ArrayList<>();
-                for(int i = 31; i < 46 && record[i] != null; i++){
+                for(int i = 16; i < 31 && record[i] != null; i++){
                     recipeSteps.add(record[i]);
                 }
                 recipe.setRecipeSteps(recipeSteps);
 
-                int prepTime = record[46].isEmpty() || record[46].isBlank() ? 0 : Integer.parseInt(record[46]);
+                int prepTime = record[31].isEmpty() || record[31].isBlank() ? 0 : Integer.parseInt(record[31]);
                 recipe.setPrepTime(prepTime);
-                recipe.setDescription(record[47]);
+                recipe.setDescription(record[32]);
             }
         }
         catch(Exception error){
