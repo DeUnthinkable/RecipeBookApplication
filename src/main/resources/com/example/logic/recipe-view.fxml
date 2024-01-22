@@ -11,7 +11,6 @@
 <?import javafx.scene.layout.FlowPane?>
 <?import javafx.scene.text.Font?>
 
-
 <ScrollPane hbarPolicy="NEVER" vbarPolicy="ALWAYS" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.logic.RecipeViewController">
    <content>
       <FlowPane>
@@ -48,12 +47,12 @@
                   </FlowPane>
                   <FlowPane minWidth="-Infinity" prefHeight="69.0" prefWidth="640.0">
                      <children>
-                        <Label text="Prep Time:">
+                        <Label text="Prep Time (minutes):">
                            <font>
                               <Font size="19.0" />
                            </font>
                         </Label>
-                        <TextField promptText="2h 30m">
+                        <TextField fx:id="prepTime" promptText="30">
                            <FlowPane.margin>
                               <Insets left="10.0" />
                            </FlowPane.margin>
@@ -71,7 +70,7 @@
                               </Label>
                               <ListView fx:id="ingredientListView" prefHeight="200.0" prefWidth="334.0" />
                               <Button fx:id="deleteIngredient" mnemonicParsing="false" text="Delete" />
-                              <TextField fx:id="newIngredientName11" prefHeight="26.0" prefWidth="245.0" promptText="Egg Whites 100mL" />
+                              <TextField fx:id="newIngredientName" prefHeight="26.0" prefWidth="245.0" promptText="Egg Whites 100mL" />
                               <Button fx:id="addIngredient" mnemonicParsing="false" text="Add" />
                            </children>
                         </FlowPane>
@@ -86,10 +85,10 @@
                                     <Font size="19.0" />
                                  </font>
                               </Label>
-                              <ListView fx:id="ingredientListView1" prefHeight="200.0" prefWidth="334.0" />
-                              <Button fx:id="deleteIngredient1" mnemonicParsing="false" text="Delete" />
-                              <TextField fx:id="newIngredientName1" prefHeight="26.0" prefWidth="245.0" promptText="Add the egg whites into a bowl." />
-                              <Button fx:id="addIngredient1" mnemonicParsing="false" text="Add" />
+                              <ListView fx:id="preparationStepsView" prefHeight="200.0" prefWidth="334.0" />
+                              <Button fx:id="deleteStep" mnemonicParsing="false" text="Delete" />
+                              <TextField fx:id="newStepName" prefHeight="26.0" prefWidth="245.0" promptText="Add the egg whites into a bowl." />
+                              <Button fx:id="addStep" mnemonicParsing="false" text="Add" />
                            </children>
                         </FlowPane>
                      </children>
