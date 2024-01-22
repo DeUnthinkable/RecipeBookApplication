@@ -86,7 +86,7 @@ public class AppDataReadWrite
                 }
 
                 List<String> recipeSteps = new ArrayList<>();
-                for(int i = 16; i < 31 && record[i] != null; i++){
+                for(int i = 16; i < 31 && !record[i].equals(""); i++){
                     recipeSteps.add(record[i]);
                 }
                 recipe.setRecipeSteps(recipeSteps);
