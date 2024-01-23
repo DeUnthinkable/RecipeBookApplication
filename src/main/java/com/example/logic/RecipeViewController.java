@@ -72,11 +72,31 @@ public class RecipeViewController
         AppDataReadWrite.writeRecipeListToFile(recipeList);
     }
 
-    private void dataChangeHandlers()
-    {
-        this.description.textProperty().addListener(event -> {
-            this.recipe.setDescription(this.description.getText());
-            updateData();
-        });
+    private void dataChangeHandlers(){
+        this.description.textProperty().addListener(event -> registerDescriptionChange());
+        this.addIngredient.setOnAction(e -> registerIngredientListChange());
+        this.addStep.setOnAction(e -> registerStepsListChange());
+    }
+
+    private void registerDescriptionChange(){
+        this.recipe.setDescription(this.description.getText());
+        updateData();
+    }
+
+    private void registerIngredientListChange(){
+        //Adds the new ingredient entered using the text field to the ingredient list
+        this.ingredientListView.getItems().add(this.newIngredientName.getText());
+        //Clears the text field
+        this.newIngredientName.textProperty().set("");
+        //Updates the recipe with the new ingredient list
+        this.recipe.setIngredientList(this.ingredientListView.getItems().stream().toList());
+        updateData();
+    }
+
+    private void registerStepsListChange(){
+        this.preparationStepsView.getItems().add(this.newStepName.getText());
+        this.newIngredientName.textProperty().set("");
+        this.recipe.setRecipeSteps(this.preparationStepsView.getItems().stream().toList());
+        updateData();
     }
 }
