@@ -72,11 +72,38 @@ public class RecipeViewController
         AppDataReadWrite.writeRecipeListToFile(recipeList);
     }
 
-    private void dataChangeHandlers()
-    {
-        this.description.textProperty().addListener(event -> {
-            this.recipe.setDescription(this.description.getText());
-            updateData();
-        });
+    private void dataChangeHandlers(){
+        this.description.textProperty().addListener(event -> registerDescriptionChange());
+        this.addIngredient.setOnAction(event -> registerNewIngredient());
+        this.addStep.setOnAction(event -> registerNewStep());
+    }
+
+    private void registerDescriptionChange(){
+        this.recipe.setDescription(this.description.getText());
+        updateData();
+    }
+
+    private void registerNewIngredient(){
+        //Adds the new ingredient entered using the text field to the ingredient list
+        this.ingredientListView.getItems().add(this.newIngredientName.getText());
+        //Clears the text field
+        this.newIngredientName.textProperty().set("");
+        //Scroll the list to show the newly added ingredient
+        this.ingredientListView.scrollTo(this.ingredientListView.getItems().size());
+        //Updates the recipe with the new ingredient list
+        this.recipe.setIngredientList(this.ingredientListView.getItems().stream().toList());
+        updateData();
+    }
+
+    private void registerNewStep(){
+        //Adds the new step entered using the text field to the recipe steps list
+        this.preparationStepsView.getItems().add(this.newStepName.getText());
+        //Clears the text field
+        this.newIngredientName.textProperty().set("");
+        //Scroll the list to show the newly added step
+        this.preparationStepsView.scrollTo(this.preparationStepsView.getItems().size());
+        //Updates the recipe with the new recipe steps list
+        this.recipe.setRecipeSteps(this.preparationStepsView.getItems().stream().toList());
+        updateData();
     }
 }
