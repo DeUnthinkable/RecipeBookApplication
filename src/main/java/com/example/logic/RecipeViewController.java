@@ -74,6 +74,7 @@ public class RecipeViewController
 
     private void dataChangeHandlers(){
         this.description.textProperty().addListener(event -> registerDescriptionChange());
+        this.prepTime.textProperty().addListener(event -> registerPrepTimeChange());
         this.addIngredient.setOnAction(event -> registerNewIngredient());
         this.addStep.setOnAction(event -> registerNewStep());
     }
@@ -104,6 +105,12 @@ public class RecipeViewController
         this.preparationStepsView.scrollTo(this.preparationStepsView.getItems().size());
         //Updates the recipe with the new recipe steps list
         this.recipe.setRecipeSteps(this.preparationStepsView.getItems().stream().toList());
+        updateData();
+    }
+
+    private void registerPrepTimeChange(){
+        int prepTimeToSave = this.prepTime.getText().matches("[0-9]+") ? Integer.parseInt(this.prepTime.getText()) : 0;
+        this.recipe.setPrepTime(prepTimeToSave);
         updateData();
     }
 }
