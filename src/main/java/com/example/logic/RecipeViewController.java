@@ -102,7 +102,7 @@ public class RecipeViewController
         //Adds the new step entered using the text field to the recipe steps list
         this.preparationStepsView.getItems().add(this.newStepName.getText());
         //Clears the text field
-        this.newIngredientName.textProperty().set("");
+        this.newStepName.textProperty().set("");
         //Scroll the list to show the newly added step
         this.preparationStepsView.scrollTo(this.preparationStepsView.getItems().size());
         //Updates the recipe with the new recipe steps list
