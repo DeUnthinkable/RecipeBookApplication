@@ -19,6 +19,7 @@ public class RecipeBookApplication extends Application
         File recipeListFile = new File("Recipes.csv");
         AppDataReadWrite.init(recipeListFile);
 
+        stage.resizableProperty().set(false);
         SceneController.switchToStartView(stage);
     }
 }
