@@ -77,6 +77,8 @@ public class RecipeViewController
         this.prepTime.textProperty().addListener(event -> registerPrepTimeChange());
         this.addIngredient.setOnAction(event -> registerNewIngredient());
         this.addStep.setOnAction(event -> registerNewStep());
+        this.deleteIngredient.setOnAction(event -> registerDeletedIngredient());
+        this.deleteStep.setOnAction(event -> registerDeletedStep());
     }
 
     private void registerDescriptionChange(){
@@ -113,4 +115,23 @@ public class RecipeViewController
         this.recipe.setPrepTime(prepTimeToSave);
         updateData();
     }
+
+    private void registerDeletedIngredient(){
+        String selectedItem = this.ingredientListView.getSelectionModel().getSelectedItem();
+        //Remove the selected item from the ingredient list view
+        this.ingredientListView.getItems().remove(selectedItem);
+        //Updates the recipe with the new ingredient list
+        this.recipe.setIngredientList(this.ingredientListView.getItems().stream().toList());
+        updateData();
+    }
+
+    private void registerDeletedStep(){
+        String selectedItem = this.preparationStepsView.getSelectionModel().getSelectedItem();
+        //Remove the selected item from the recipe step list view
+        this.preparationStepsView.getItems().remove(selectedItem);
+        //Updates the recipe with the new recipe steps list
+        this.recipe.setRecipeSteps(this.preparationStepsView.getItems().stream().toList());
+        updateData();
+    }
+
 }
