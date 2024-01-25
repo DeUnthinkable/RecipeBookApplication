@@ -30,7 +30,7 @@
                      <children>
                         <Label fx:id="recipeName" alignment="CENTER" contentDisplay="TOP" text="RECIPE NAME">
                            <font>
-                              <Font size="36.0" />
+                              <Font size="30.0" />
                            </font>
                         </Label>
                      </children>
@@ -93,7 +93,7 @@
                         </FlowPane>
                      </children>
                   </FlowPane>
-                  <FlowPane alignment="CENTER" layoutX="10.0" layoutY="539.0" prefHeight="152.0" prefWidth="800.0">
+                  <FlowPane alignment="BOTTOM_CENTER" layoutX="10.0" layoutY="539.0" prefHeight="75.0" prefWidth="800.0">
                      <children>
                         <Label text="Bon Appetit !">
                            <font>
