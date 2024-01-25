@@ -11,6 +11,9 @@ public class SceneController {
     private static Scene scene;
     private static FXMLLoader root;
 
+    private static final int SCENE_WIDTH = 800;
+    private static final int SCENE_HEIGHT = 600;
+
     public static void switchToStartView(ActionEvent event)
     {
         try {
@@ -25,7 +28,7 @@ public class SceneController {
     public static void switchToStartView(Stage stage){
         try {
             root = new FXMLLoader(RecipeBookApplication.class.getResource("start-view.fxml"));
-            scene = new Scene(root.load(), 640, 480);
+            scene = new Scene(root.load(), SCENE_WIDTH, SCENE_HEIGHT);
             scene.getStylesheets().add(RecipeBookApplication.class.getResource("start-view.css").toExternalForm());
 
             stage.setScene(scene);
@@ -41,7 +44,7 @@ public class SceneController {
         try {
             root = new FXMLLoader(RecipeBookApplication.class.getResource("recipe-view.fxml"));
             stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
-            scene = new Scene(root.load());
+            scene = new Scene(root.load(), SCENE_WIDTH, SCENE_HEIGHT);
             scene.getStylesheets().add(RecipeBookApplication.class.getResource("recipe-view.css").toExternalForm());
 
             stage.setScene(scene);

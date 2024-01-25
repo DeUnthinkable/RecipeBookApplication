@@ -1,63 +1,110 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.FlowPane?>
-<?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane fx:id="body" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="480.0" prefWidth="640.0" stylesheets="@recipe-view.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.logic.RecipeViewController">
-   <left>
-      <FlowPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+<ScrollPane hbarPolicy="NEVER" vbarPolicy="ALWAYS" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.logic.RecipeViewController">
+   <content>
+      <FlowPane>
          <children>
-            <FlowPane fx:id="header" alignment="CENTER" prefHeight="54.0" prefWidth="640.0">
-               <children>
-                  <Label fx:id="recipeName" alignment="CENTER" contentDisplay="TOP" text="RECIPE NAME">
-                     <font>
-                        <Font size="36.0" />
-                     </font>
-                  </Label>
-               </children>
-            </FlowPane>
             <FlowPane>
                <children>
-                  <Label text="Description">
-                     <font>
-                        <Font size="19.0" />
-                     </font>
-                  </Label>
-                  <TextArea fx:id="description" prefHeight="63.0" prefWidth="640.0" promptText="Enter description here..." wrapText="true" />
+                  <AnchorPane fx:id="navbar">
+                     <children>
+                        <Button fx:id="backToStartViewButton" mnemonicParsing="false" text="Back" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                     </children>
+                  </AnchorPane>
                </children>
             </FlowPane>
-            <FlowPane prefHeight="252.0" prefWidth="336.0">
+            <FlowPane prefHeight="200.0" prefWidth="200.0">
                <children>
-                  <Label text="Ingredients">
-                     <font>
-                        <Font size="19.0" />
-                     </font>
-                  </Label>
-                  <ListView fx:id="ingredientListView" prefHeight="200.0" prefWidth="334.0" />
-                  <Button fx:id="deleteIngredient" mnemonicParsing="false" text="Delete" />
-                  <TextField fx:id="newIngredientName" prefHeight="26.0" prefWidth="245.0" />
-                  <Button fx:id="addIngredient" mnemonicParsing="false" text="Add" />
+                  <FlowPane fx:id="header" alignment="CENTER" prefHeight="54.0" prefWidth="800.0">
+                     <children>
+                        <Label fx:id="recipeName" alignment="CENTER" contentDisplay="TOP" text="RECIPE NAME">
+                           <font>
+                              <Font size="36.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </FlowPane>
+                  <FlowPane prefHeight="107.0" prefWidth="640.0">
+                     <children>
+                        <Label text="Description">
+                           <font>
+                              <Font size="19.0" />
+                           </font>
+                        </Label>
+                        <TextArea fx:id="description" prefHeight="63.0" prefWidth="800.0" promptText="Enter description here..." wrapText="true" />
+                     </children>
+                  </FlowPane>
+                  <FlowPane minWidth="-Infinity" prefHeight="69.0" prefWidth="640.0">
+                     <children>
+                        <Label text="Prep Time (minutes):">
+                           <font>
+                              <Font size="19.0" />
+                           </font>
+                        </Label>
+                        <TextField fx:id="prepTime" promptText="30">
+                           <FlowPane.margin>
+                              <Insets left="10.0" />
+                           </FlowPane.margin>
+                        </TextField>
+                     </children>
+                  </FlowPane>
+                  <FlowPane prefWidth="800.0">
+                     <children>
+                        <FlowPane prefHeight="299.0" prefWidth="336.0">
+                           <children>
+                              <Label text="Ingredients">
+                                 <font>
+                                    <Font size="19.0" />
+                                 </font>
+                              </Label>
+                              <ListView fx:id="ingredientListView" prefHeight="200.0" prefWidth="334.0" />
+                              <Button fx:id="deleteIngredient" mnemonicParsing="false" text="Delete" />
+                              <TextField fx:id="newIngredientName" prefHeight="26.0" prefWidth="245.0" promptText="Egg Whites 100mL" />
+                              <Button fx:id="addIngredient" mnemonicParsing="false" text="Add" />
+                           </children>
+                        </FlowPane>
+                     </children>
+                  </FlowPane>
+                  <FlowPane prefWidth="800.0">
+                     <children>
+                        <FlowPane prefHeight="207.0" prefWidth="336.0">
+                           <children>
+                              <Label text="Preperation Steps:">
+                                 <font>
+                                    <Font size="19.0" />
+                                 </font>
+                              </Label>
+                              <ListView fx:id="preparationStepsView" prefHeight="200.0" prefWidth="334.0" />
+                              <Button fx:id="deleteStep" mnemonicParsing="false" text="Delete" />
+                              <TextField fx:id="newStepName" prefHeight="26.0" prefWidth="245.0" promptText="Add the egg whites into a bowl." />
+                              <Button fx:id="addStep" mnemonicParsing="false" text="Add" />
+                           </children>
+                        </FlowPane>
+                     </children>
+                  </FlowPane>
+                  <FlowPane alignment="CENTER" layoutX="10.0" layoutY="539.0" prefHeight="152.0" prefWidth="800.0">
+                     <children>
+                        <Label text="Bon Appetit !">
+                           <font>
+                              <Font size="19.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </FlowPane>
                </children>
             </FlowPane>
-         </children></FlowPane>
-   </left>
-   <right>
-      <Pane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER" />
-   </right>
-   <top>
-      <AnchorPane fx:id="navbar" BorderPane.alignment="CENTER">
-         <children>
-            <Button fx:id="backToStartViewButton" mnemonicParsing="false" text="&lt;- Back" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0" />
-            <Button layoutX="57.0" mnemonicParsing="false" text="All Ingredients" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
          </children>
-      </AnchorPane>
-   </top>
-</BorderPane>
+      </FlowPane>
+   </content>
+</ScrollPane>
