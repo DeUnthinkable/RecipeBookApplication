@@ -32,4 +32,6 @@ Java: Main programming language
 FXML: Layout, structuring, and styling
 
 ## How to Install and Run the Project
-Coming soon!
+1. Download the latest Java JDK.
+2. Download the jar file from the latest realse notes
+3. Run the jar file
